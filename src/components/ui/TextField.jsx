@@ -1,5 +1,6 @@
 import React from 'react'
 import { styles } from './styles'
+import PropTypes from 'prop-types'
 
 const TextField = ({ labelText, type, placeholder, name }) => {
 	return (
@@ -18,5 +19,11 @@ const TextField = ({ labelText, type, placeholder, name }) => {
 	)
 }
 
+TextField.propTypes = {
+	labelText: PropTypes.string.isRequired,
+	type: PropTypes.string.isRequired,
+	placeholder: PropTypes.string.isRequired,
+	name: PropTypes.string.isRequired,
+}
 
 export default TextField
