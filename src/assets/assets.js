@@ -22,6 +22,7 @@ import toolbarHome from './toolbarHome.svg'
 import toolbarProfile from './toolbarProfile.svg'
 import filter from './filter.svg'
 import login from './login.svg'
+import tempozeLogoMobile from './tempozeLogoMobile.svg'
 
 export {
 	acceptBtn,
@@ -48,4 +49,5 @@ export {
 	toolbarProfile,
 	filter,
 	login,
+	tempozeLogoMobile
 }
