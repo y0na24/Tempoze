@@ -7,5 +7,12 @@
 
 body {
 	font-family: 'Inter', sans-serif;
-	@apply bg-accentColor;
+	@apply bg-accentColor text-white;
+}
+
+.active {
+	border-bottom: 1px solid white;
+}
+
+.loader {
 }

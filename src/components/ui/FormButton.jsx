@@ -1,15 +1,17 @@
+import PropTypes from 'prop-types'
 import React from 'react'
-import { styles } from './styles'
+import styles from './styles'
 
-const FormButton = () => {
-	return (
-		<button
-			className={styles.formButton}
-			type='submit'
-		>
-			Войти
-		</button>
-	)
+function FormButton({ display }) {
+  return (
+    <button className={`${styles.formButton} ${display}`} type='submit'>
+      Войти
+    </button>
+  )
+}
+
+FormButton.propTypes = {
+  display: PropTypes.string.isRequired,
 }
 
 export default FormButton

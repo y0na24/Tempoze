@@ -1,36 +1,53 @@
-import FormButton from '@/components/ui/FormButton'
-import TextField from '@/components/ui/TextField'
 import React from 'react'
+import PropTypes from 'prop-types'
 
-const Form = () => {
-	return (
-		<form style={{ flex: '1 1 auto' }}>
-			<TextField
-				labelText='Email'
-				type='email'
-				name='email'
-				placeholder='Введите почту'
-			/>
-			<TextField
-				labelText='Пароль'
-				type='password'
-				name='password'
-				placeholder='Введите пароль'
-			/>
-			<FormButton />
-			<div className='flex items-center justify-between'>
-				<a className='text-sm text-white underline' href='#'>
-					Забыли пароль?
-				</a>
-				<div className='flex items-center gap-[0.375rem]'>
-					<input type='checkbox' name='remember' id='remember' />
-					<label className='text-sm text-white' htmlFor='remember'>
-						Запомнить меня
-					</label>
-				</div>
-			</div>
-		</form>
-	)
+import TextField from '@/components/ui/TextField'
+
+function Form({ children, title }) {
+  return (
+    <form className='mt-[8.4375rem] w-full max-w-[40rem] mx-auto px-5'>
+      <h2 className='text-white font-bold text-5xl hidden xl:block mb-12'>
+        {title}
+      </h2>
+      <TextField
+        labelText='Email'
+        type='email'
+        name='email'
+        placeholder='Введите почту'
+      />
+      <TextField
+        labelText='Пароль'
+        type='password'
+        name='password'
+        placeholder='Введите пароль'
+      />
+      {children}
+      <div className='flex items-center justify-between'>
+        <a className='text-sm text-white underline' href='/#'>
+          Забыли пароль?
+        </a>
+        <div className='flex items-center gap-[0.375rem]'>
+          <input
+            className='text-lightGreen border-0 h-4 w-4 accent-white cursor-pointer  focus:text-primary focus:ring-offset-0 focus:ring-0 rounded'
+            type='checkbox'
+            name='rememberName'
+            id='remember'
+          />
+          <label className='text-sm text-white' htmlFor='rememberName'>
+            Запомнить меня
+          </label>
+        </div>
+      </div>
+    </form>
+  )
+}
+
+Form.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
+  title: PropTypes.string.isRequired,
 }
 
 export default Form
