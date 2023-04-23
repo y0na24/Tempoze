@@ -19,7 +19,7 @@ function ToolBar({ display }) {
             </NavLink>
           </li>
           <li>
-            <NavLink to='#'>
+            <NavLink to='history'>
               <img
                 src={toolbarCreate}
                 alt='Создать задачу'

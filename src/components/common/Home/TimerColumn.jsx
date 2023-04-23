@@ -6,11 +6,11 @@ import AddButton from '@/components/ui/AddButton'
 
 function TimerColumn() {
   return (
-    <div className='pt-16 px-16 flex flex-col rounded-xl bg-mainColor basis-[980px]'>
-      <div className='flex gap-6 mb-12'>
-        <p className='font-bold text-[4rem]'>00:00</p>
+    <div className='pt-16 sm:px-16 flex-col rounded-xl sm:bg-mainColor basis-[980px]'>
+      <div className='flex items-center gap-6 mb-12'>
+        <p className='font-bold text-5xl sm:text-[4rem]'>00:00</p>
         <button type='button'>
-          <img src={playBtn} alt='Старт' width={64} height={64} />
+          <img src={playBtn} alt='Старт' width={53} height={53} />
         </button>
       </div>
       <TextField

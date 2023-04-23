@@ -36,8 +36,8 @@ function HomePage() {
   return isLoading ? (
     <Loader value={loaderValue} />
   ) : (
-    <div className='flex justify-center mt-3 min-h-[92vh] gap-3 max-w-[120rem] mx-auto px-3'>
-      <ProjectsColumn onClick={handleOpenClick} />
+    <div className='flex justify-center mt-3 sm:min-h-[92vh] gap-3 max-w-[120rem] mx-auto px-3'>
+      <ProjectsColumn onClick={handleOpenClick} display='sm:flex' />
       <TimerColumn />
       {isOpen && <AddProjectColumn onClick={handleCloseClick} />}
     </div>

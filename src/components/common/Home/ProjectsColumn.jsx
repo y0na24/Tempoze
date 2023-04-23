@@ -2,9 +2,11 @@ import PropTypes from 'prop-types'
 
 import ProjectList from '@/components/ui/ProjectList'
 
-function ProjectsColumn({ onClick }) {
+function ProjectsColumn({ onClick, display }) {
+  const displayStyles =		display === 'mobile' ? 'flex sm:hidden' : 'hidden sm:flex'
+
   return (
-    <div className='flex flex-col p-6 rounded-xl bg-mainColor'>
+    <div className={`${displayStyles} flex-col p-6 rounded-xl sm:bg-mainColor mt-8 sm:mt-0`}>
       <div className='flex-1'>
         <ProjectList amount={1} title='Личные проекты' />
         <ProjectList amount={3} title='Командные проекты' />
@@ -22,6 +24,7 @@ function ProjectsColumn({ onClick }) {
 
 ProjectsColumn.propTypes = {
   onClick: PropTypes.func.isRequired,
+  display: PropTypes.string.isRequired,
 }
 
 export default ProjectsColumn
