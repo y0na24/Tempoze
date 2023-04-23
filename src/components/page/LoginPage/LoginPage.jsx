@@ -1,6 +1,6 @@
 import Form from '@/components/common/Form/Form'
-import FormButton from '@/components/ui/FormButton'
-import FormButtonDesk from '@/components/ui/FormButtonDesk'
+import FormButton from '@/components/ui/Buttons/FormButton'
+import FormButtonDesk from '@/components/ui/Buttons/FormButtonDesk'
 
 function LoginPage() {
   return (

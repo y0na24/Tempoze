@@ -1,17 +1,20 @@
 import React from 'react'
 
 import ProjectsColumn from '@/components/common/Home/ProjectsColumn'
+import AddProjectColumn from '@/components/common/Home/AddProjectColumn'
 
 function HistoryPage() {
-  const [isOpen, setIsOpen] = React.useState(false)
+	const [isAdd, setIsAdd] = React.useState(false)
 
-  const handleOpenClick = () => {
-    setIsOpen(true)
-  }
+	const handleClick = () => {
+		setIsAdd(!isAdd)
+	}
 
-  return (
-    !isOpen && <ProjectsColumn display='mobile' onClick={handleOpenClick} />
-  )
+	return isAdd ? (
+		<AddProjectColumn onClick={handleClick} />
+	) : (
+		<ProjectsColumn display='mobile' onClick={handleClick} />
+	)
 }
 
 export default HistoryPage
