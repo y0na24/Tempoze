@@ -1,4 +1,3 @@
-import React from 'react'
 import { uniqueId } from 'lodash'
 
 import ProgressBar from '@/components/common/Analytics/ProgressBar'

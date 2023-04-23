@@ -1,5 +1,3 @@
-import React from 'react'
-
 import AnalyticsPage from '@/components/page/AnalyticsPage'
 
 function Analytics() {

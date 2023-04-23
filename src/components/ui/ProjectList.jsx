@@ -1,6 +1,5 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import { uniqueId } from 'lodash'
+import PropTypes from 'prop-types'
 
 import ProjectItem from './ProjectItem'
 

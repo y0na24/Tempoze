@@ -1,5 +1,3 @@
-import React from 'react'
-
 import Form from '@/components/common/Form/Form'
 import FormButton from '@/components/ui/FormButton'
 import FormButtonDesk from '@/components/ui/FormButtonDesk'

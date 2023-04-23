@@ -1,10 +1,10 @@
-import React from 'react'
 import PropTypes from 'prop-types'
 
 import TextField from '@/components/ui/TextField'
 import CategoryList from './CategoryList'
 
-import { acceptBtn, cancelBtn } from '@/assets/assets'
+import AddButton from '@/components/ui/AddButton'
+import ExitButton from '@/components/ui/ExitButton'
 
 function AddProjectColumn({ onClick }) {
   return (
@@ -32,19 +32,8 @@ function AddProjectColumn({ onClick }) {
         <CategoryList />
       </div>
       <div className='flex justify-end items-center gap-3'>
-        <button
-          type='button'
-          className='bg-red rounded-full w-12 h-12 flex justify-center items-center hover:bg- transition duration-300'
-          onClick={onClick}
-        >
-          <img src={cancelBtn} alt='Отменить' />
-        </button>
-        <button
-          type='button'
-          className='bg-lightGreen rounded-full w-16 h-16 flex justify-center items-center hover:bg-lime transition duration-300'
-        >
-          <img src={acceptBtn} alt='Добавить' />
-        </button>
+        <ExitButton onClick={onClick} />
+        <AddButton />
       </div>
     </div>
   )

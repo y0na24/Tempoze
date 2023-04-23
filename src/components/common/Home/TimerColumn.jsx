@@ -1,9 +1,8 @@
-import React from 'react'
-
 import TextField from '@/components/ui/TextField'
 import CategoryList from './CategoryList'
 
 import { playBtn } from '@/assets/assets'
+import AddButton from '@/components/ui/AddButton'
 
 function TimerColumn() {
   return (
@@ -27,6 +26,7 @@ function TimerColumn() {
         type='text'
       />
       <CategoryList />
+      <AddButton margin='ml-auto' />
     </div>
   )
 }

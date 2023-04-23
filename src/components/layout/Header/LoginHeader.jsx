@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { tempozeLogoMobile, tempozeTitleWhite } from '@/assets/assets'
 
 function LoginHeader() {

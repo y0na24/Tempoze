@@ -1,5 +1,3 @@
-import React from 'react'
-
 import CategoryItem from '@/components/ui/CategoryItem'
 
 import categories from '@/data/categories'
