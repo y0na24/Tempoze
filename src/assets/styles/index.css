@@ -14,5 +14,19 @@ body {
 	border-bottom: 1px solid white;
 }
 
-.loader {
+.toolbar-active {
+	display: flex;
+	justify-content: center;
+	position: relative;
+}
+
+.toolbar-active::after {
+	content: '';
+	position: absolute;
+	bottom: -9px;
+	width: 30px;
+	height: 2px;
+	margin-inline: auto;
+	border-radius: 2px;
+	background-color: white;
 }
