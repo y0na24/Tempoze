@@ -8,7 +8,7 @@ import AddButton from '@/components/ui/Buttons/AddButton'
 import { addNewProject } from '@/assets/assets'
 
 function ProjectsColumn({ onClick, display }) {
-  const currentUrl = useLocation()
+  const currentUrl = useLocation().pathname
 
   const displayStyles =		display === 'mobile' ? 'flex sm:hidden' : 'hidden sm:flex'
 
@@ -20,7 +20,7 @@ function ProjectsColumn({ onClick, display }) {
         <ProjectList amount={1} title='Личные проекты' />
         <ProjectList amount={3} title='Командные проекты' />
       </div>
-      {currentUrl.pathname.includes('history') ? (
+      {currentUrl === '/history' ? (
         <AddButton onClick={onClick} margin='ml-auto' image={addNewProject} />
       ) : (
         <CreateButton onClick={onClick} />
