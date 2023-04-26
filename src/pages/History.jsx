@@ -1,4 +1,4 @@
-import HistoryPage from '@/components/page/HistoryPage/HistoryPage'
+import HistoryPage from '@/components/page/HistoryPage'
 
 function History() {
   return <HistoryPage />

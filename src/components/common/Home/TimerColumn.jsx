@@ -6,7 +6,7 @@ import AddButton from '@/components/ui/Buttons/AddButton'
 
 function TimerColumn() {
   return (
-    <div className='pt-16 sm:px-16 flex-col rounded-xl sm:bg-mainColor basis-[980px]'>
+    <div className='pt-16 sm:px-16 flex-col rounded-xl sm:bg-mainColor basis-[61.25rem]'>
       <div className='flex items-center gap-6 mb-12'>
         <p className='font-bold text-5xl sm:text-[4rem]'>00:00</p>
         <button type='button'>
