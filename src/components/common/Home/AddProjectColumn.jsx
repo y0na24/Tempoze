@@ -10,8 +10,10 @@ import { acceptBtn } from '@/assets/assets'
 
 function AddProjectColumn({ onClick }) {
   return (
-    <div className='flex flex-col p-6 rounded-xl sm:bg-mainColor basis-[592px]'>
-      <h2 className='font-bold text-[2.5rem] mb-4 sm:mb-[3.3125rem]'>Создать проект</h2>
+    <div className='flex flex-col p-6 rounded-xl sm:bg-mainColor sm:basis-[592px]'>
+      <h2 className='font-bold text-[2.5rem] mb-4 sm:mb-[3.3125rem]'>
+        Создать проект
+      </h2>
       <div className='flex-1'>
         <TextField
           labelText='Название проекта'

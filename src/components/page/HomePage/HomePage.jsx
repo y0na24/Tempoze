@@ -10,9 +10,9 @@ function HomePage() {
   const [loaderValue, setLoaderValue] = React.useState(0)
   const [isAdd, setIsAdd] = React.useState(false)
 
-  const handleClick = () => {
-    setIsAdd(!isAdd)
-  }
+  const handleClick = React.useCallback(() => {
+    setIsAdd((prevIsAdd) => !prevIsAdd)
+  }, [])
 
   React.useEffect(() => {
     const interval = setInterval(() => {
@@ -33,13 +33,19 @@ function HomePage() {
     <Loader value={loaderValue} />
   ) : (
     <div className='flex justify-center mt-3 sm:min-h-[92vh] gap-3 max-w-[120rem] mx-auto px-3'>
-      {window.innerWidth < 1200 ? (
-        !isAdd && <ProjectsColumn onClick={handleClick} display='sm:flex' />
+      <ProjectsColumn onClick={handleClick} className='sm:flex' />
+      {window?.innerWidth < 1200 ? (
+        isAdd ? (
+          <AddProjectColumn onClick={handleClick} />
+        ) : (
+          <TimerColumn time='00:00' />
+        )
       ) : (
-        <ProjectsColumn onClick={handleClick} display='sm:flex' />
+        <>
+          <TimerColumn time='00:00' />
+          {isAdd && <AddProjectColumn onClick={handleClick} />}
+        </>
       )}
-      <TimerColumn />
-      {isAdd && <AddProjectColumn onClick={handleClick} />}
     </div>
   )
 }

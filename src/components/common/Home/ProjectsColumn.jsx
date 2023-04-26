@@ -7,10 +7,10 @@ import AddButton from '@/components/ui/Buttons/AddButton'
 
 import { addNewProject } from '@/assets/assets'
 
-function ProjectsColumn({ onClick, display }) {
+function ProjectsColumn({ onClick, className }) {
   const currentUrl = useLocation().pathname
 
-  const displayStyles =		display === 'mobile' ? 'flex sm:hidden' : 'hidden sm:flex'
+  const displayStyles =		className === 'mobile' ? 'flex sm:hidden' : 'hidden sm:flex'
 
   return (
     <div
@@ -31,7 +31,7 @@ function ProjectsColumn({ onClick, display }) {
 
 ProjectsColumn.propTypes = {
   onClick: PropTypes.func.isRequired,
-  display: PropTypes.string.isRequired,
+  className: PropTypes.string.isRequired,
 }
 
 export default ProjectsColumn
