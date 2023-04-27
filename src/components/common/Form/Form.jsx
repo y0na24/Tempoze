@@ -1,11 +1,22 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { useNavigate } from 'react-router-dom'
 
 import TextField from '@/components/ui/TextField'
 
 function Form({ children, title }) {
+  const navigate = useNavigate()
+
+  const handleRedirect = (event) => {
+    event.preventDefault()
+    navigate('/home')
+  }
+
   return (
-    <form className='mt-[8.4375rem] w-full max-w-[40rem] mx-auto px-5'>
+    <form
+      onSubmit={handleRedirect}
+      className='mt-[8.4375rem] w-full max-w-[40rem] mx-auto px-5'
+    >
       <h2 className='text-white font-bold text-5xl hidden xl:block mb-12'>
         {title}
       </h2>

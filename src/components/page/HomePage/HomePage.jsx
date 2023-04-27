@@ -33,7 +33,7 @@ function HomePage() {
     <Loader value={loaderValue} />
   ) : (
     <div className='flex justify-center mt-3 sm:min-h-[92vh] gap-3 max-w-[120rem] mx-auto px-3'>
-      <ProjectsColumn onClick={handleClick} className='sm:flex' />
+      <ProjectsColumn onClick={handleClick} display='small' />
       {window?.innerWidth < 1200 ? (
         isAdd ? (
           <AddProjectColumn onClick={handleClick} />

@@ -14,7 +14,10 @@ function ToolBar({ display }) {
       <nav className='bg-mainColor py-[1.625rem] px-7 rounded-xl'>
         <ul className='flex items-center justify-between'>
           <li>
-            <NavLink to='/' className={({ isActive }) => (isActive ? 'toolbar-active' : '')}>
+            <NavLink
+              to='home'
+              className={({ isActive }) => (isActive ? 'toolbar-active' : '')}
+            >
               <img src={toolbarHome} alt='Главная' width='20' height='20' />
             </NavLink>
           </li>
@@ -32,7 +35,10 @@ function ToolBar({ display }) {
             </NavLink>
           </li>
           <li>
-            <NavLink to='/analytics' className={({ isActive }) => (isActive ? 'toolbar-active' : '')}>
+            <NavLink
+              to='analytics'
+              className={({ isActive }) => (isActive ? 'toolbar-active' : '')}
+            >
               <img
                 src={toolbarAnalytics}
                 alt='Аналитика'
@@ -42,7 +48,10 @@ function ToolBar({ display }) {
             </NavLink>
           </li>
           <li>
-            <NavLink to='/profile' className={({ isActive }) => (isActive ? 'toolbar-active' : '')}>
+            <NavLink
+              to='profile'
+              className={({ isActive }) => (isActive ? 'toolbar-active' : '')}
+            >
               <img src={toolbarProfile} alt='Профиль' width='20' height='20' />
             </NavLink>
           </li>
