@@ -7,7 +7,7 @@ function DesktopHeader() {
 
 	const isDisabledLink = isStartingPage
 		? 'pointer-events-none opacity-50 cursor-not-allowed'
-		: ''
+		: null
 
 	return (
 		<nav className='bg-black w-full m-auto px-[2.1875rem] py-[1.125rem] rounded-xl'>
