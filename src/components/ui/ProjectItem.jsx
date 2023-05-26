@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 
 function ProjectItem({ projectName, image }) {
   return (
-    <li className='flex items-center'>
+    <div className='flex items-center'>
       <img
         className='mr-[0.9063rem]'
         src={image}
@@ -11,7 +11,7 @@ function ProjectItem({ projectName, image }) {
         height={15}
       />
       <p className='text-[1.125rem]'>{projectName}</p>
-    </li>
+    </div>
   )
 }
 

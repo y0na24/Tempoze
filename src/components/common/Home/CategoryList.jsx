@@ -1,31 +1,41 @@
-import CategoryItem from '@/components/ui/CategoryItem'
+import PropTypes from 'prop-types'
+
+import Category from '@/components/ui/Category'
 
 import categories from '@/data/categories'
 
-import { addNewCategory } from '@/assets/assets'
-
-function CategoryList() {
+function CategoryList({ children }) {
   return (
     <div>
+      {children && (
       <h3 className='text-base leading-[1.0625rem] text-white mb-3'>Теги</h3>
-      <ul className='flex gap-3 mb-3'>
-        {categories.map((category) => (
-          <CategoryItem
-            key={category.id}
-            id={category.id}
-            name={category.name}
-            bgColor={category.bgColor}
-          />
-        ))}
-        <button
-          type='button'
-          className='flex items-center justify-center bg-[#3F3E43] w-8 h-8 rounded-full'
-        >
-          <img src={addNewCategory} alt='Добавить категорию' />
-        </button>
-      </ul>
+      )}
+      <div className='flex gap-3'>
+        <ul className={`flex gap-3 ${children ? 'mb-3' : null}`}>
+          {categories.map((category) => (
+            <Category
+              key={category.id}
+              id={category.id}
+              name={category.name}
+              bgColor={category.bgColor}
+            />
+          ))}
+        </ul>
+        {children}
+      </div>
     </div>
   )
+}
+
+CategoryList.defaultProps = {
+  children: null,
+}
+
+CategoryList.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]),
 }
 
 export default CategoryList

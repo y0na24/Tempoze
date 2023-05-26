@@ -5,6 +5,7 @@ import CategoryList from './CategoryList'
 
 import { playBtn, acceptBtn } from '@/assets/assets'
 import AddButton from '@/components/ui/Buttons/AddButton'
+import AddTagButton from '@/components/ui/Buttons/AddTagButton'
 
 function TimerColumn({ time }) {
   return (
@@ -27,7 +28,9 @@ function TimerColumn({ time }) {
         name='description'
         type='text'
       />
-      <CategoryList />
+      <CategoryList>
+        <AddTagButton />
+      </CategoryList>
       <AddButton margin='ml-auto' image={acceptBtn} />
     </div>
   )

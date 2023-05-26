@@ -1,7 +1,7 @@
-import { uniqueId } from 'lodash'
+/* eslint-disable react/no-array-index-key */
 
 import ProgressBar from '@/components/common/Analytics/ProgressBar'
-import ProjectHistory from '@/components/common/Analytics/ProjectHistory'
+import Projects from '@/components/common/Analytics/Projects'
 import StatSquare from '@/components/common/Analytics/StatSquare'
 
 function AnalyticsPage() {
@@ -36,11 +36,7 @@ function AnalyticsPage() {
         <h2 className='mb-6 text-[2.5rem] font-bold hidden md:block'>
           Проекты
         </h2>
-        <div className='overflow-x-scroll md:overflow-x-auto'>
-          {Array.from({ length: 7 }, () => 0).map(() => (
-            <ProjectHistory key={uniqueId()} />
-          ))}
-        </div>
+        <Projects />
       </div>
     </div>
   )

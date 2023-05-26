@@ -1,35 +1,31 @@
-import { uniqueId } from 'lodash'
+/* eslint-disable react/no-array-index-key */
 import PropTypes from 'prop-types'
 
 import ProjectItem from './ProjectItem'
 
 import { projectSymbol } from '@/assets/assets'
 
-function ProjectList({ title, amount }) {
+function ProjectsHistory({ title, amount }) {
   return (
     <div className='mb-9'>
       <h3 className='text-xl font-semibold mb-4'>{title}</h3>
       <ul>
-        {Array.from({ length: amount }, () => 0).map(() => (
-          <ProjectItem
-            key={uniqueId()}
-            projectName='Проект'
-            image={projectSymbol}
-          />
+        {Array.from({ length: amount }, () => 0).map((_, i) => (
+          <ProjectItem key={i} projectName='Проект' image={projectSymbol} />
         ))}
       </ul>
     </div>
   )
 }
 
-ProjectList.defaultProps = {
+ProjectsHistory.defaultProps = {
   title: 'Проекты',
   amount: 2,
 }
 
-ProjectList.propTypes = {
+ProjectsHistory.propTypes = {
   title: PropTypes.string,
   amount: PropTypes.number,
 }
 
-export default ProjectList
+export default ProjectsHistory

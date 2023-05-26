@@ -7,6 +7,7 @@ import AddButton from '@/components/ui/Buttons/AddButton'
 import ExitButton from '@/components/ui/Buttons/ExitButton'
 
 import { acceptBtn } from '@/assets/assets'
+import AddTagButton from '@/components/ui/Buttons/AddTagButton'
 
 function AddProjectColumn({ onClick }) {
   return (
@@ -33,7 +34,9 @@ function AddProjectColumn({ onClick }) {
           name='projectName'
           type='text'
         />
-        <CategoryList />
+        <CategoryList>
+          <AddTagButton />
+        </CategoryList>
       </div>
       <div className='flex justify-end items-center gap-3 mt-6'>
         <ExitButton onClick={onClick} />

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 
-function CategoryItem({ bgColor, name }) {
+function Category({ bgColor, name }) {
   const colorVariants = {
     green: 'bg-[#4B9445]',
     red: 'bg-red',
@@ -19,9 +19,9 @@ function CategoryItem({ bgColor, name }) {
   )
 }
 
-CategoryItem.propTypes = {
+Category.propTypes = {
   bgColor: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
 }
 
-export default CategoryItem
+export default Category

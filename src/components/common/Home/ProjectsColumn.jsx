@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import { useLocation } from 'react-router-dom'
 
-import ProjectList from '@/components/ui/ProjectList'
+import ProjectsHistory from '@/components/ui/ProjectsHistory'
 import CreateButton from '@/components/ui/Buttons/CreateButton'
 import AddButton from '@/components/ui/Buttons/AddButton'
 
@@ -17,9 +17,10 @@ function ProjectsColumn({ onClick, display }) {
       className={`${displayStyles} flex-col p-6 rounded-xl sm:bg-mainColor mt-8 sm:mt-0`}
     >
       <div className='flex-1'>
-        <ProjectList amount={1} title='Личные проекты' />
-        <ProjectList amount={3} title='Командные проекты' />
+        <ProjectsHistory amount={1} title='Личные проекты' />
+        <ProjectsHistory amount={3} title='Командные проекты' />
       </div>
+
       {currentUrl === '/history' ? (
         <AddButton onClick={onClick} margin='ml-auto' image={addNewProject} />
       ) : (
