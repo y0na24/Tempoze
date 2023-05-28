@@ -5,6 +5,7 @@ import Home from '@/pages/Home'
 import Login from '@/pages/Login'
 import NotFound from '@/pages/NotFound'
 import History from './pages/History'
+import Profile from './pages/Profile'
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path='home' element={<Home />} />
         <Route path='history' element={<History />} />
         <Route path='analytics' element={<Analytics />} />
+        <Route path='profile' element={<Profile />} />
         <Route path='*' element={<NotFound />} />
       </Route>
     </Routes>
