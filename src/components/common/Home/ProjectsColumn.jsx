@@ -17,8 +17,7 @@ function ProjectsColumn({ onClick, display }) {
       className={`${displayStyles} flex-col p-6 rounded-xl sm:bg-mainColor mt-8 sm:mt-0`}
     >
       <div className='flex-1'>
-        <ProjectsHistory amount={1} title='Личные проекты' />
-        <ProjectsHistory amount={3} title='Командные проекты' />
+        <ProjectsHistory amount={1} title='Список проектов' />
       </div>
 
       {currentUrl === '/history' ? (

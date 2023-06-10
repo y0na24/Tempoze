@@ -45,7 +45,7 @@ function ProfilePage() {
         <div className='flex justify-between items-center'>
           <a href='/'>Отменить</a>
           <AddButton image={acceptBtn} margin='sm:hidden' />
-          <CreateButton width='max-w-[12.3125rem]' />
+          <CreateButton upperCase />
         </div>
       </div>
     </>

@@ -11,10 +11,8 @@ function Project({ time }) {
   return (
     <li className={styles.projectHistoryContainer}>
       <ProjectItem projectName='Проект' image={projectSymbol} />
-      <ProjectItem projectName='Username' image={toolbarProfile} />
-
+      <ProjectItem projectName='Описание' image={toolbarProfile} />
       <p className='text-4 font-medium'>{time}</p>
-
       <CategoryList />
     </li>
   )

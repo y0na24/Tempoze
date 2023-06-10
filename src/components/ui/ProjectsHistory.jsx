@@ -8,7 +8,7 @@ import { projectSymbol } from '@/assets/assets'
 function ProjectsHistory({ title, amount }) {
   return (
     <div className='mb-9'>
-      <h3 className='text-xl font-semibold mb-4'>{title}</h3>
+      <h3 className='text-xl font-semibold mb-4 text-center'>{title}</h3>
       <ul>
         {Array.from({ length: amount }, () => 0).map((_, i) => (
           <ProjectItem key={i} projectName='Проект' image={projectSymbol} />

@@ -1,28 +1,28 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-function CreateButton({ onClick, width }) {
+function CreateButton({ onClick, upperCase }) {
   return (
     <button
       type='button'
-      className={`bg-lightGreen ${width ? 'uppercase' : null} ${
-        width ? 'sm:block' : null
-      } ${width} hidden transition duration-300 text-base font-semibold rounded-xl py-4 w-full hover:bg-lime`}
+      className={`bg-lightGreen ${
+			upperCase ? 'uppercase max-w-[12.3125rem] sm:block' : null
+      } transition duration-300 text-base font-semibold rounded-xl py-4 w-full hover:bg-lime`}
       onClick={onClick}
     >
-      Создать
+      {upperCase ? 'Сохранить' : 'Создать'}
     </button>
   )
 }
 
 CreateButton.defaultProps = {
-  width: null,
+  upperCase: false,
   onClick: null,
 }
 
 CreateButton.propTypes = {
   onClick: PropTypes.func,
-  width: PropTypes.string,
+  upperCase: PropTypes.bool,
 }
 
 export default CreateButton
