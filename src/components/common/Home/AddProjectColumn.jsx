@@ -44,7 +44,7 @@ function AddProjectColumn({ onClick, onChange }) {
           placeholder='Введите описание'
           name='sideDescription'
           type='text'
-          OnChange={onChange}
+          onChange={onChange}
         />
         <TextField
           labelText='Затраченое время в часах'

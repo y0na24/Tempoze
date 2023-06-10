@@ -38,6 +38,7 @@ function CategoryList({
         {isVisible && (
         <input
           type='text'
+          autoFocus
           className='bg-transparent outline-none border-b mr-8'
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}

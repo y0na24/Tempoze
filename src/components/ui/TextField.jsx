@@ -14,7 +14,7 @@ function TextField({
       <label htmlFor={name} className={styles.label}>
         {labelText}
       </label>
-      {name === 'description' ? (
+      {name === 'currentDescription' || name === 'sideDescription' ? (
         <textarea
           placeholder={placeholder}
           name={name}
@@ -40,7 +40,7 @@ TextField.propTypes = {
   type: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
+  onChange: PropTypes.func,
 }
 
 export default TextField
