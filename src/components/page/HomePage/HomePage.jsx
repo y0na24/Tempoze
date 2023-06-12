@@ -2,119 +2,121 @@ import React from 'react'
 import { nanoid } from '@reduxjs/toolkit'
 import debounce from 'lodash.debounce'
 
-import AddProjectColumn from '@/components/common/Home/AddProjectColumn'
-import ProjectsColumn from '@/components/common/Home/ProjectsColumn'
-import TimerColumn from '@/components/common/Home/TimerColumn'
+import SideProjectsColumn from '@/components/common/Home/SideProjectsColumn'
+import ProjectsListColumn from '@/components/common/Home/ProjectsListColumn'
+import CurrentProjectsColumn from '@/components/common/Home/CurrentProjectsColumn'
+
+const initialState = { name: '', description: '', time: '', categories: [] }
 
 function HomePage() {
-  const [isAdd, setIsAdd] = React.useState(false)
-  const [sideProject, setSideProject] = React.useState({
-    name: '',
-    description: '',
-    time: '',
-    categories: [],
-  })
-  const [currentProject, setCurrentProject] = React.useState({
-    name: '',
-    description: '',
-    time: '',
-    categories: [],
-  })
+	const [isAdd, setIsAdd] = React.useState(false)
+	const [sideProject, setSideProject] = React.useState(initialState)
+	const [currentProject, setCurrentProject] = React.useState(initialState)
 
-  const addCurrentCategory = (categoryName) => {
-    setCurrentProject((prevState) => ({
-      ...prevState,
-      _id: nanoid(),
-      categories: [
-        ...prevState.categories,
-        { name: categoryName, id: nanoid() },
-      ],
-    }))
-  }
+	const initiateSideState = () => {
+		setSideProject(initialState)
+	}
 
-  const addSideCategory = (categoryName) => {
-    setSideProject((prevState) => ({
-      ...prevState,
-      _id: nanoid(),
-      categories: [
-        ...prevState.categories,
-        { name: categoryName, id: nanoid() },
-      ],
-    }))
-  }
+	const initiateCurrentState = () => {
+		setCurrentProject(initialState)
+	}
 
-  const handleSideChange = (target) => {
-    setSideProject((prevState) => ({
-      ...prevState,
-      [target.name]: target.value,
-    }))
-  }
+	const addCurrentCategory = categoryName => {
+		setCurrentProject(prevState => ({
+			...prevState,
+			categories: [
+				...prevState.categories,
+				{ name: categoryName, id: nanoid() },
+			],
+		}))
+	}
 
-  const handleCurrentChange = (target) => {
-    setCurrentProject((prevState) => ({
-      ...prevState,
-      [target.name]: target.value,
-    }))
-  }
+	const addSideCategory = categoryName => {
+		setSideProject(prevState => ({
+			...prevState,
+			categories: [
+				...prevState.categories,
+				{ name: categoryName, id: nanoid() },
+			],
+		}))
+	}
 
-  const debouncedSideChangeHandler = React.useCallback(
-    debounce(handleSideChange, 200),
-    [],
-  )
+	const handleSideChange = target => {
+		setSideProject(prevState => ({
+			...prevState,
+			[target.name]: target.value,
+		}))
+	}
 
-  const debouncedCurrentChangeHandler = React.useCallback(
-    debounce(handleCurrentChange, 200),
-    [],
-  )
+	const handleCurrentChange = target => {
+		setCurrentProject(prevState => ({
+			...prevState,
+			[target.name]: target.value,
+		}))
+	}
 
-  const handleClick = React.useCallback(() => {
-    setIsAdd((prevIsAdd) => !prevIsAdd)
-  }, [])
+	const debouncedSideChangeHandler = React.useCallback(
+		debounce(handleSideChange, 200),
+		[]
+	)
 
-  return (
-    <div className='flex justify-center mt-3 sm:min-h-[90vh] gap-3 max-w-[120rem] mx-auto px-3'>
-      <ProjectsColumn onClick={handleClick} display='small' />
-      {window?.innerWidth < 1200 ? (
-			isAdd ? (
-  <AddProjectColumn
-    onClick={handleClick}
-    onChange={debouncedSideChangeHandler}
-    onEnter={addSideCategory}
-    sideCategories={sideProject.categories}
-    sideProject={sideProject}
-  />
+	const debouncedCurrentChangeHandler = React.useCallback(
+		debounce(handleCurrentChange, 200),
+		[]
+	)
+
+	const handleClick = () => {
+		setIsAdd(prevState => !prevState)
+	}
+
+	return (
+		<div className='flex justify-center mt-3 sm:min-h-[90vh] gap-3 max-w-[120rem] mx-auto px-3'>
+			<ProjectsListColumn onClick={handleClick} display='small' />
+			{window?.innerWidth < 1200 ? (
+				isAdd ? (
+					<SideProjectsColumn
+						onClick={handleClick}
+						onChange={debouncedSideChangeHandler}
+						onEnter={addSideCategory}
+						sideCategories={sideProject.categories}
+						sideProject={sideProject}
+						onSubmit={initiateSideState}
+					/>
+				) : (
+					<CurrentProjectsColumn
+						time='00:00'
+						onClick={handleClick}
+						onChange={debouncedCurrentChangeHandler}
+						onEnter={addCurrentCategory}
+						currentCategories={currentProject.categories}
+						currentProject={currentProject}
+						onSubmit={initiateCurrentState}
+					/>
+				)
 			) : (
-  <TimerColumn
-    time='00:00'
-    onClick={handleClick}
-    onChange={debouncedCurrentChangeHandler}
-    onEnter={addCurrentCategory}
-    currentCategories={currentProject.categories}
-    currentProject={currentProject}
-  />
-			)
-      ) : (
-        <>
-          <TimerColumn
-            time='00:00'
-            onChange={debouncedCurrentChangeHandler}
-            onEnter={addCurrentCategory}
-            currentCategories={currentProject.categories}
-            currentProject={currentProject}
-          />
-          {isAdd && (
-          <AddProjectColumn
-            onClick={handleClick}
-            onChange={debouncedSideChangeHandler}
-            onEnter={addSideCategory}
-            sideCategories={sideProject.categories}
-            sideProject={sideProject}
-          />
-          )}
-        </>
-      )}
-    </div>
-  )
+				<>
+					<CurrentProjectsColumn
+						time='00:00'
+						onChange={debouncedCurrentChangeHandler}
+						onEnter={addCurrentCategory}
+						currentCategories={currentProject.categories}
+						currentProject={currentProject}
+						onSubmit={initiateCurrentState}
+					/>
+					{isAdd && (
+						<SideProjectsColumn
+							onClick={handleClick}
+							onChange={debouncedSideChangeHandler}
+							onEnter={addSideCategory}
+							sideCategories={sideProject.categories}
+							sideProject={sideProject}
+							onSubmit={initiateSideState}
+						/>
+					)}
+				</>
+			)}
+		</div>
+	)
 }
 
 export default HomePage

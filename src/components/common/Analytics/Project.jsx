@@ -1,29 +1,45 @@
 import PropTypes from 'prop-types'
 
-import ProjectItem from '../../ui/ProjectItem'
-
 import { projectSymbol, toolbarProfile } from '@/assets/assets'
 
 import styles from './styles'
 import CategoryList from '../Home/CategoryList'
 
-function Project({ time }) {
-  return (
-    <li className={styles.projectHistoryContainer}>
-      <ProjectItem projectName='Проект' image={projectSymbol} />
-      <ProjectItem projectName='Описание' image={toolbarProfile} />
-      <p className='text-4 font-medium'>{time}</p>
-      <CategoryList />
-    </li>
-  )
+function Project({ name, description, time }) {
+	return (
+		<li className={styles.projectHistoryContainer}>
+			<div className='flex items-center'>
+				<img
+					className='mr-[0.9063rem]'
+					src={projectSymbol}
+					alt='Проект'
+					width={15}
+					height={15}
+				/>
+				<p className='text-[1.125rem]'>{name}</p>
+			</div>
+			<div className='flex items-center'>
+				<img
+					className='mr-[0.9063rem]'
+					src={toolbarProfile}
+					alt='Проект'
+					width={15}
+					height={15}
+				/>
+				<p className='text-[1.125rem]'>{description}</p>
+			</div>
+			<p className='text-4 font-medium'>{time}</p>
+			<CategoryList />
+		</li>
+	)
 }
 
 Project.defaultProps = {
-  time: '20 часов',
+	time: '20 часов',
 }
 
 Project.propTypes = {
-  time: PropTypes.string,
+	time: PropTypes.string,
 }
 
 export default Project
