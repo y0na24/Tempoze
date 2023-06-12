@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 function AddButton({ onClick, margin, image }) {
   return (
     <button
-      type='button'
+      type='submit'
       className={`bg-lightGreen ${margin} rounded-full w-16 h-16 flex justify-center items-center hover:bg-lime transition duration-300`}
       onClick={onClick}
     >

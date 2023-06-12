@@ -61,9 +61,9 @@ CategoryList.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]),
-  categories: PropTypes.array.isRequired,
+  categories: PropTypes.array,
   onEnter: PropTypes.func.isRequired,
-  isVisible: PropTypes.bool.isRequired,
+  isVisible: PropTypes.bool,
   changeVisibility: PropTypes.func.isRequired,
 }
 

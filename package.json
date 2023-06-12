@@ -12,13 +12,16 @@
 		"format": "prettier --write ."
 	},
 	"dependencies": {
+		"@hookform/resolvers": "^3.1.0",
 		"@reduxjs/toolkit": "^1.9.5",
 		"lodash.debounce": "^4.0.8",
 		"prop-types": "^15.8.1",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
+		"react-hook-form": "^7.44.3",
 		"react-redux": "^8.0.7",
-		"react-router-dom": "^6.9.0"
+		"react-router-dom": "^6.9.0",
+		"yup": "^1.2.0"
 	},
 	"devDependencies": {
 		"@tailwindcss/forms": "^0.5.3",

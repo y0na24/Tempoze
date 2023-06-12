@@ -1,21 +1,33 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
+import { yupResolver } from '@hookform/resolvers/yup'
 
+import FormButton from '@/components/ui/Buttons/FormButton'
 import TextField from '@/components/ui/TextField'
+import FormButtonDesk from '@/components/ui/Buttons/FormButtonDesk'
+import loginSchema from '@/utils/validation'
 
-function Form({ children, title }) {
+function Form({ title }) {
   const navigate = useNavigate()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm({ resolver: yupResolver(loginSchema) })
 
-  const handleRedirect = (event) => {
-    event.preventDefault()
+  const handleFormSubmit = () => {
+    reset()
     navigate('/home')
   }
 
   return (
     <form
-      onSubmit={handleRedirect}
+      onSubmit={handleSubmit(handleFormSubmit)}
       className='mt-[8.4375rem] w-full max-w-[40rem] mx-auto px-5'
+      noValidate
     >
       <h2 className='text-white font-bold text-5xl hidden xl:block mb-12'>
         {title}
@@ -25,14 +37,21 @@ function Form({ children, title }) {
         type='email'
         name='email'
         placeholder='Введите почту'
+        register={register}
+        error={errors.email?.message}
       />
       <TextField
         labelText='Пароль'
         type='password'
         name='password'
+        register={register}
         placeholder='Введите пароль'
+        error={errors.password?.message}
       />
-      {children}
+
+      <FormButtonDesk display='hidden sm:block' />
+      <FormButton display='sm:hidden' />
+
       <div className='flex items-center justify-between'>
         <a className='text-sm text-white underline' href='/#'>
           Забыли пароль?
@@ -54,10 +73,6 @@ function Form({ children, title }) {
 }
 
 Form.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]).isRequired,
   title: PropTypes.string.isRequired,
 }
 

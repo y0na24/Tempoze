@@ -1,18 +1,29 @@
 /* eslint-disable react/no-array-index-key */
 import PropTypes from 'prop-types'
+import { useSelector } from 'react-redux'
 
 import ProjectItem from './ProjectItem'
 
+import { getProjectsList } from '@/store/projectsSlice'
+
 import { projectSymbol } from '@/assets/assets'
 
-function ProjectsHistory({ title, amount }) {
+function ProjectsHistory({ title }) {
+  const projects = useSelector(getProjectsList())
+
   return (
     <div className='mb-9'>
       <h3 className='text-xl font-semibold mb-4 text-center'>{title}</h3>
       <ul>
-        {Array.from({ length: amount }, () => 0).map((_, i) => (
-          <ProjectItem key={i} projectName='Проект' image={projectSymbol} />
-        ))}
+        {projects
+          ? projects.map((p) => (
+            <ProjectItem
+              key={p._id}
+              projectName={p.name}
+              image={projectSymbol}
+            />
+          ))
+          : 'Проектов нет'}
       </ul>
     </div>
   )
@@ -20,12 +31,10 @@ function ProjectsHistory({ title, amount }) {
 
 ProjectsHistory.defaultProps = {
   title: 'Проекты',
-  amount: 2,
 }
 
 ProjectsHistory.propTypes = {
   title: PropTypes.string,
-  amount: PropTypes.number,
 }
 
 export default ProjectsHistory

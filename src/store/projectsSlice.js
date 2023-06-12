@@ -8,13 +8,19 @@ const projectsSlice = createSlice({
   name: 'projects',
   initialState,
   reducers: {
-    addProject(state, action) {
-      state.entities = action.payload
+    newProjectAdded(state, action) {
+      state.entities.push(action.payload)
     },
   },
 })
 
 const { reducer: projectsReducer, actions } = projectsSlice
-const { addProject } = actions
+const { newProjectAdded } = actions
+
+export const addNewProject = (payload) => (dispatch) => {
+  dispatch(newProjectAdded(payload))
+}
+
+export const getProjectsList = () => (state) => state.entities
 
 export default projectsReducer
