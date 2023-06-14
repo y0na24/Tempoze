@@ -30,3 +30,7 @@ body {
 	border-radius: 2px;
 	background-color: white;
 }
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	display: none;
+}

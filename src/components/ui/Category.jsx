@@ -1,9 +1,10 @@
 import PropTypes from 'prop-types'
 
-function Category({ name }) {
+function Category({ name, color, onDelete }) {
   return (
     <li
-      className='text-white bg-[#4B9445] mr-3 px-6 py-2 text-xs rounded-[6.1875rem] inline-block'
+      className={`text-white ${color}  mr-3 px-6 py-2 text-xs rounded-[6.1875rem] inline-block`}
+      onClick={onDelete}
     >
       {name}
     </li>
@@ -12,6 +13,7 @@ function Category({ name }) {
 
 Category.propTypes = {
   name: PropTypes.string.isRequired,
+  onDelete: PropTypes.func,
 }
 
 export default Category

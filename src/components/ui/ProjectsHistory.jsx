@@ -9,32 +9,33 @@ import { getProjectsList } from '@/store/projectsSlice'
 import { projectSymbol } from '@/assets/assets'
 
 function ProjectsHistory({ title }) {
-	const projects = useSelector(getProjectsList())
+  const projects = useSelector(getProjectsList())
 
-	return (
-		<div className='mb-9'>
-			<h3 className='text-xl font-semibold mb-4 text-center'>{title}</h3>
-			<ul>
-				{projects
-					? projects.map(p => (
-							<ProjectItem
-								key={p._id}
-								projectName={p.name}
-								image={projectSymbol}
-							/>
-					))
-					: 'Проектов нет'}
-			</ul>
-		</div>
-	)
+  return (
+    <div className='mb-9'>
+      <h3 className='text-xl font-semibold mb-4 text-center'>{title}</h3>
+      <ul>
+        {projects.length > 0
+          ? projects.map((p) => (
+            <ProjectItem
+              key={p._id}
+              projectName={p.name}
+              description={p.description}
+              image={projectSymbol}
+            />
+          ))
+          : 'Проектов нет'}
+      </ul>
+    </div>
+  )
 }
 
 ProjectsHistory.defaultProps = {
-	title: 'Проекты',
+  title: 'Проекты',
 }
 
 ProjectsHistory.propTypes = {
-	title: PropTypes.string,
+  title: PropTypes.string,
 }
 
 export default ProjectsHistory

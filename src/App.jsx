@@ -1,11 +1,11 @@
 import { Route, Routes } from 'react-router-dom'
 import Layout from './components/common/Layout'
-import Analytics from '@/pages/Analytics'
-import Home from '@/pages/Home'
-import Login from '@/pages/Login'
-import NotFound from '@/pages/NotFound'
-import History from './pages/History'
-import Profile from './pages/Profile'
+import Analytics from '@/layouts/Analytics'
+import Home from '@/layouts/Home'
+import Login from '@/layouts/Login'
+import NotFound from '@/layouts/NotFound'
+import History from './layouts/History'
+import Profile from './layouts/Profile'
 
 function App() {
   return (
