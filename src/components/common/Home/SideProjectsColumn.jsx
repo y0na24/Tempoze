@@ -25,6 +25,7 @@ function SideProjectsColumn({
   onSubmit,
 }) {
   const dispatch = useDispatch()
+
   const [isInputVisible, setIsVisible] = React.useState(false)
 
   const handleInputVisibility = () => {
@@ -34,7 +35,11 @@ function SideProjectsColumn({
   const handleSubmit = (e) => {
     e.preventDefault()
     e.target.reset()
-    const project = { ...sideProject, time: pluralizeHours(sideProject.time), _id: nanoid() }
+    const project = {
+      ...sideProject,
+      time: pluralizeHours(sideProject.time),
+      _id: nanoid(),
+    }
     dispatch(addNewProject(project))
     onSubmit()
   }

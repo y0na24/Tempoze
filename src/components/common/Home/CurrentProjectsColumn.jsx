@@ -10,11 +10,11 @@ import AddTagButton from '@/components/ui/Buttons/AddTagButton'
 
 import { addNewProject } from '@/store/projectsSlice'
 
-import { playBtn, acceptBtn } from '@/assets/assets'
+import { acceptBtn } from '@/assets/assets'
 import pluralizeHours from '@/utils/pluralizeHours'
+import Timer from './Timer'
 
 function CurrentProjectsColumn({
-  time,
   onChange,
   onEnter,
   onDelete,
@@ -24,6 +24,54 @@ function CurrentProjectsColumn({
 }) {
   const dispatch = useDispatch()
   const [isInputVisible, setIsVisible] = React.useState(false)
+  const [time, setTime] = React.useState({ s: 0, m: 0, h: 0 })
+  const [interv, setInterv] = React.useState()
+  const [status, setStatus] = React.useState(false)
+  // 0 - выключен
+  // 1 - работает
+  // 2 - пауза
+
+  const startTimer = () => {
+    runTimer()
+    setStatus(true)
+    setInterv(setInterval(runTimer, 10))
+  }
+
+  const stopTimer = () => {
+    clearInterval(interv)
+    setStatus(false)
+  }
+
+  const resetTimer = () => {
+    clearInterval(interv)
+    setStatus(false)
+    setTime({ s: 0, m: 0, h: 0 })
+  }
+
+  let updatedS = time.s
+  let updatedM = time.m
+  let updateH = time.h
+
+  const runTimer = () => {
+    if (updatedM === 60) {
+      updateH++
+      updatedM = 0
+    }
+
+    if (updatedS === 60) {
+      updatedM++
+      updatedS = 0
+    }
+
+    updatedS++
+    setTime({ s: updatedS, m: updatedM, h: updateH })
+  }
+
+  const convertTimeToHours = () => {
+    const totalSeconds = time.h * 3600 + time.m * 60 + time.s
+    const totalHours = totalSeconds / 3600
+    return totalHours.toFixed(1)
+  }
 
   const handleInputVisibility = () => {
     setIsVisible((prev) => !prev)
@@ -35,7 +83,7 @@ function CurrentProjectsColumn({
 
     const project = {
       ...currentProject,
-      time: pluralizeHours(currentProject.time),
+      time: pluralizeHours(convertTimeToHours()),
       _id: nanoid(),
     }
 
@@ -48,12 +96,13 @@ function CurrentProjectsColumn({
       onSubmit={handleSubmit}
       className='pt-16 sm:px-16 flex-col rounded-xl sm:bg-mainColor basis-[61.25rem]'
     >
-      <div className='flex items-center gap-6 mb-12'>
-        <p className='font-bold text-5xl sm:text-[4rem]'>{time}</p>
-        <button type='button'>
-          <img src={playBtn} alt='Старт' width={53} height={53} />
-        </button>
-      </div>
+      <Timer
+        time={time}
+        status={status}
+        start={startTimer}
+        stop={stopTimer}
+        reset={resetTimer}
+      />
       <TextField
         labelText='Название проекта'
         placeholder='Введите название'

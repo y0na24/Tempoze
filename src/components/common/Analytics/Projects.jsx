@@ -11,16 +11,16 @@ function Projects() {
   return (
     <ul className='overflow-x-scroll md:overflow-x-auto'>
       {projects.length > 0
-			? projects.map((p) => (
-  <Project
-    key={p._id}
-    name={p.name}
-    description={p.description}
-    time={p.time}
-    categories={p.categories}
-  />
-			))
-			: 'Проектов нет'}
+        ? projects.map((p) => (
+          <Project
+            key={p._id}
+            name={p.name}
+            description={p.description}
+            time={p.time}
+            categories={p.categories}
+          />
+        ))
+        : 'Проектов нет'}
     </ul>
   )
 }

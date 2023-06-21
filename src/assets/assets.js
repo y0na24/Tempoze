@@ -27,6 +27,7 @@ import toolbarHome from './toolbarHome.svg'
 import toolbarProfile from './toolbarProfile.svg'
 import projectDescr from './projectDescr.png'
 import cross from './cross.png'
+import restartImg from './reset.png'
 
 export {
   acceptBtn,
@@ -58,4 +59,5 @@ export {
   loaderLogo,
   projectDescr,
   cross,
+  restartImg,
 }
