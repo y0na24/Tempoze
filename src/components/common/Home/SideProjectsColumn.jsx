@@ -13,92 +13,91 @@ import AddTagButton from '@/components/ui/Buttons/AddTagButton'
 import { addNewProject } from '@/store/projectsSlice'
 
 import { acceptBtn } from '@/assets/assets'
-import pluralizeHours from '@/utils/pluralizeHours'
 
 function SideProjectsColumn({
-  onClick,
-  onChange,
-  sideProject,
-  sideCategories,
-  onEnter,
-  onDelete,
-  onSubmit,
+	onClick,
+	onChange,
+	sideProject,
+	sideCategories,
+	onEnter,
+	onDelete,
+	onSubmit,
 }) {
-  const dispatch = useDispatch()
+	const dispatch = useDispatch()
 
-  const [isInputVisible, setIsVisible] = React.useState(false)
+	const [isInputVisible, setIsVisible] = React.useState(false)
 
-  const handleInputVisibility = () => {
-    setIsVisible((prev) => !prev)
-  }
+	const handleInputVisibility = () => {
+		setIsVisible(prev => !prev)
+	}
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    e.target.reset()
-    const project = {
-      ...sideProject,
-      time: pluralizeHours(sideProject.time),
-      _id: nanoid(),
-    }
-    dispatch(addNewProject(project))
-    onSubmit()
-  }
+	const handleSubmit = e => {
+		e.preventDefault()
+		e.target.reset()
+		const project = {
+			...sideProject,
+			time: sideProject.time,
+			_id: nanoid(),
+		}
+		dispatch(addNewProject(project))
+		onSubmit()
+	}
 
-  return (
-    <form
-      onSubmit={handleSubmit}
-      className='flex flex-col p-6 rounded-xl sm:bg-mainColor sm:basis-[592px]'
-    >
-      <h2 className='font-bold text-[2.5rem] mb-4 sm:mb-[3.3125rem]'>
-        Создать проект
-      </h2>
-      <div className='flex-1'>
-        <TextField
-          labelText='Название проекта'
-          placeholder='Введите название'
-          name='name'
-          type='text'
-          onChange={onChange}
-        />
-        <TextField
-          labelText='Добавьте описание'
-          placeholder='Введите описание'
-          name='description'
-          type='text'
-          onChange={onChange}
-        />
-        <TextField
-          labelText='Затраченое время в часах'
-          placeholder='Введите время'
-          name='time'
-          type='number'
-          onChange={onChange}
-        />
-        <CategoryList
-          categories={sideCategories}
-          onEnter={onEnter}
-          onDelete={onDelete}
-          isVisible={isInputVisible}
-          changeVisibility={setIsVisible}
-        >
-          <AddTagButton onClick={handleInputVisibility} />
-        </CategoryList>
-      </div>
-      <div className='flex justify-end items-center gap-3 mt-6'>
-        <ExitButton onClick={onClick} />
-        <AddButton image={acceptBtn} />
-      </div>
-    </form>
-  )
+	return (
+		<form
+			onSubmit={handleSubmit}
+			className='flex flex-col p-6 rounded-xl sm:bg-mainColor sm:basis-[592px]'
+		>
+			<h2 className='font-bold text-[2.5rem] mb-4 sm:mb-[3.3125rem]'>
+				Создать проект
+			</h2>
+			<div className='flex-1'>
+				<TextField
+					labelText='Название проекта'
+					placeholder='Введите название'
+					name='name'
+					type='text'
+					onChange={onChange}
+				/>
+				<TextField
+					labelText='Добавьте описание'
+					placeholder='Введите описание'
+					name='description'
+					type='text'
+					onChange={onChange}
+				/>
+				<TextField
+					labelText='Затраченое время в часах'
+					placeholder='Введите время'
+					name='time'
+					type='text'
+					onChange={onChange}
+				/>
+				<CategoryList
+					categories={sideCategories}
+					onEnter={onEnter}
+					onDelete={onDelete}
+					isVisible={isInputVisible}
+					changeVisibility={setIsVisible}
+				>
+					<AddTagButton onClick={handleInputVisibility} />
+				</CategoryList>
+			</div>
+			<div className='flex justify-end items-center gap-3 mt-6'>
+				<ExitButton onClick={onClick} />
+				<AddButton image={acceptBtn} />
+			</div>
+		</form>
+	)
 }
 
 SideProjectsColumn.propTypes = {
-  onClick: PropTypes.func,
-  onChange: PropTypes.func,
-  sideProject: PropTypes.object,
-  sideCategories: PropTypes.array,
-  onEnter: PropTypes.func,
-  onSubmit: PropTypes.func,
+	onClick: PropTypes.func,
+	onChange: PropTypes.func,
+	sideProject: PropTypes.object,
+	sideCategories: PropTypes.array,
+	onEnter: PropTypes.func,
+	onSubmit: PropTypes.func,
 }
 
 export default SideProjectsColumn
