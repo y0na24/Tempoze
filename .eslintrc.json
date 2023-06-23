@@ -32,6 +32,11 @@
 			}
 		],
 		"jsx-a11y/label-has-associated-control": "off",
-		"jsx-quotes": ["error", "prefer-single"]
+		"jsx-quotes": ["error", "prefer-single"],
+		"no-nested-ternary": "off",
+		"react/require-default-props": "off",
+		"react/jsx-props-no-spreading": "off",
+		"jsx-a11y/no-autofocus": "off",
+		"react/forbid-prop-types": "off"
 	}
 }

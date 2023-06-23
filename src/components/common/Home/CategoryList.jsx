@@ -1,33 +1,74 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
-import CategoryItem from '@/components/ui/CategoryItem'
+import Category from '@/components/ui/Category'
 
-import categories from '@/data/categories'
+function CategoryList({
+  categories,
+  onEnter,
+  isVisible,
+  changeVisibility,
+  onDelete,
+  children,
+}) {
+  const [inputValue, setInputValue] = React.useState('')
 
-import { addNewCategory } from '@/assets/assets'
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      onEnter(inputValue)
+      changeVisibility()
+      setInputValue('')
+    }
+  }
 
-function CategoryList() {
   return (
     <div>
       <h3 className='text-base leading-[1.0625rem] text-white mb-3'>Теги</h3>
-      <ul className='flex gap-3'>
-        {categories.map((category) => (
-          <CategoryItem
-            key={category.id}
-            id={category.id}
-            name={category.name}
-            bgColor={category.bgColor}
-          />
-        ))}
-        <button
-          type='button'
-          className='flex items-center justify-center bg-[#3F3E43] p-2 rounded-full'
-        >
-          <img src={addNewCategory} alt='Добавить категорию' />
-        </button>
-      </ul>
+
+      <div className='flex'>
+        <ul className='flex'>
+          {categories
+						&& categories.map((category) => (
+  <Category
+    key={category.id}
+    id={category.id}
+    color={category.color}
+    name={category.name}
+    onDelete={() => onDelete(category.id)}
+  />
+						))}
+        </ul>
+        {isVisible && (
+        <input
+          type='text'
+          autoFocus
+          className='bg-transparent w-[160px] outline-none border-b mr-8'
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+          placeholder='Введите категорию'
+          onKeyDown={handleKeyDown}
+        />
+        )}
+        {children}
+      </div>
     </div>
   )
+}
+
+CategoryList.defaultProps = {
+  children: null,
+}
+
+CategoryList.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]),
+  categories: PropTypes.array,
+  onEnter: PropTypes.func,
+  isVisible: PropTypes.bool,
+  changeVisibility: PropTypes.func,
+  onDelete: PropTypes.func,
 }
 
 export default CategoryList

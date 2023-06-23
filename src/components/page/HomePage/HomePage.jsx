@@ -1,45 +1,31 @@
 import React from 'react'
 
-import AddProjectColumn from '@/components/common/Home/AddProjectColumn'
-import ProjectsColumn from '@/components/common/Home/ProjectsColumn'
-import TimerColumn from '@/components/common/Home/TimerColumn'
-import Loader from '@/components/ui/Loader'
+import SideProjectsColumn from '@/components/common/Home/SideProjectsColumn'
+import ProjectsListColumn from '@/components/common/Home/ProjectsListColumn'
+import CurrentProjectsColumn from '@/components/common/Home/CurrentProjectsColumn'
 
 function HomePage() {
-  const [isLoading, setIsLoading] = React.useState(true)
-  const [loaderValue, setLoaderValue] = React.useState(0)
-  const [isOpen, setIsOpen] = React.useState(false)
+  const [isAdd, setIsAdd] = React.useState(false)
 
-  const handleOpenClick = () => {
-    setIsOpen(true)
+  const handleClick = () => {
+    setIsAdd((prevState) => !prevState)
   }
 
-  const handleCloseClick = () => {
-    setIsOpen(false)
-  }
-
-  React.useEffect(() => {
-    const interval = setInterval(() => {
-      setLoaderValue((oldValue) => {
-        const newValue = oldValue + 10
-
-        if (newValue > 100) {
-          setIsLoading(false)
-          return () => clearInterval(interval)
-        }
-
-        return newValue
-      })
-    }, 100)
-  }, [])
-
-  return isLoading ? (
-    <Loader value={loaderValue} />
-  ) : (
-    <div className='flex justify-center mt-3 min-h-[92vh] gap-3 max-w-[120rem] mx-auto px-3'>
-      <ProjectsColumn onClick={handleOpenClick} />
-      <TimerColumn />
-      {isOpen && <AddProjectColumn onClick={handleCloseClick} />}
+  return (
+    <div className='flex justify-center mt-3 sm:min-h-[90vh] gap-3 max-w-[120rem] mx-auto px-3'>
+      <ProjectsListColumn onClick={handleClick} display='small' />
+      {window?.innerWidth < 1200 ? (
+			  isAdd ? (
+  <SideProjectsColumn onClick={handleClick} />
+			  ) : (
+  <CurrentProjectsColumn />
+			  )
+      ) : (
+        <>
+          <CurrentProjectsColumn />
+          {isAdd && <SideProjectsColumn onClick={handleClick} />}
+        </>
+      )}
     </div>
   )
 }

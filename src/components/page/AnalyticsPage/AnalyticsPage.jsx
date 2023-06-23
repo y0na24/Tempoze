@@ -1,28 +1,38 @@
-import React from 'react'
-import { uniqueId } from 'lodash'
+/* eslint-disable react/no-array-index-key */
 
+import { useSelector } from 'react-redux'
 import ProgressBar from '@/components/common/Analytics/ProgressBar'
-import ProjectHistory from '@/components/common/Analytics/ProjectHistory'
+import Projects from '@/components/common/Analytics/Projects'
 import StatSquare from '@/components/common/Analytics/StatSquare'
 
+import {
+  getLongestSession,
+  getProjectsAmount,
+  getTimeSum,
+} from '@/store/projectsSlice'
+
 function AnalyticsPage() {
+  const timeSum = useSelector(getTimeSum())
+  const projectsAmount = useSelector(getProjectsAmount())
+  const longestSession = useSelector(getLongestSession())
+
   return (
     <div className='max-w-[111rem] mx-auto px-4'>
-      <div className='flex flex-col lg:flex-row lg:justify-between mt-[4.5rem] mb-12'>
+      <div className='flex flex-col lg:flex-row lg:justify-between mt-8 mb-8 md:mt-[4.5rem] md:mb-12'>
         <div className='flex gap-3 justify-center mb-5 lg:mb-0'>
-          <StatSquare statNumber='72' text='Часов потрачено' />
-          <StatSquare statNumber='14' text='Проектов завершено' />
-          <StatSquare statNumber='2.6ч' text='Самая долгая сессия' />
+          <StatSquare statNumber={timeSum} text='Часов потрачено' />
+          <StatSquare statNumber={projectsAmount} text='Проектов завершено' />
+          <StatSquare statNumber={longestSession} text='Самая долгая сессия' />
         </div>
         <div className='gap-3 flex-wrap justify-center hidden sm:flex'>
           <StatSquare
-            statNumber='10'
+            statNumber={10}
             text='Пауз на работе'
             isProgressBar
             color='gold'
           />
           <StatSquare
-            statNumber='90'
+            statNumber={90}
             text='Эффективности'
             isProgressBar
             color='lime'
@@ -34,10 +44,10 @@ function AnalyticsPage() {
         </div>
       </div>
       <div>
-        <h2 className='mb-6 text-[2.5rem] font-bold'>Проекты</h2>
-        {Array.from({ length: 7 }, () => 0).map(() => (
-          <ProjectHistory key={uniqueId()} />
-        ))}
+        <h2 className='mb-6 text-[2.5rem] font-bold hidden md:block'>
+          Проекты
+        </h2>
+        <Projects />
       </div>
     </div>
   )

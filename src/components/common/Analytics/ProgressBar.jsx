@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types'
-import React from 'react'
 
 function ProgressBar({ color, text, statNumber }) {
   const colorVariants = {
@@ -10,9 +9,7 @@ function ProgressBar({ color, text, statNumber }) {
   return (
     <div className='[&:not(:last-child)]:mb-3'>
       <p className='text-[15px] font-semibold leading-none'>
-        {statNumber}
-        %
-        {text}
+        {`${statNumber}% ${text}`}
       </p>
       <div className='h-[7px] w-full bg-black inline-block rounded-lg relative -z-20'>
         <div

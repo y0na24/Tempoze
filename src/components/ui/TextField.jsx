@@ -3,27 +3,52 @@ import PropTypes from 'prop-types'
 import styles from './styles'
 
 function TextField({
-  labelText, type, placeholder, name,
+  labelText,
+  type,
+  placeholder,
+  name,
+  error,
+  register,
+  onChange,
 }) {
+  const toValidate = register ? { ...register(name) } : null
+
+  const handleChange = ({ target }) => {
+    onChange({ name: target.name, value: target.value })
+  }
+
   return (
     <div className='flex flex-col mb-9'>
-      <label htmlFor={name} className={styles.label}>
+      <legend htmlFor={name} className={styles.label}>
         {labelText}
-      </label>
+      </legend>
       {name === 'description' ? (
-        <textarea
-          placeholder={placeholder}
-          name={name}
-          className={`${styles.input} resize-none h-[168px]`}
-        />
+        <>
+          <textarea
+            placeholder={placeholder}
+            name={name}
+            className={`${styles.input} resize-none h-[168px]`}
+            required
+            onChange={onChange ? handleChange : null}
+            {...toValidate}
+          />
+          <p className='text-red'>{error}</p>
+        </>
       ) : (
-        <input
-          className={styles.input}
-          type={type}
-          placeholder={placeholder}
-          name={name}
-          autoComplete='off'
-        />
+        <>
+          <input
+            className={styles.input}
+            type={type}
+            placeholder={placeholder}
+            name={name}
+            autoComplete='off'
+            pattern={name === 'time' ? '^[.0-9]*$' : null}
+            required
+            onChange={onChange ? handleChange : null}
+            {...toValidate}
+          />
+          <p className='text-rose-700'>{error}</p>
+        </>
       )}
     </div>
   )
@@ -34,6 +59,9 @@ TextField.propTypes = {
   type: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+  onChange: PropTypes.func,
+  register: PropTypes.func,
+  error: PropTypes.string,
 }
 
 export default TextField

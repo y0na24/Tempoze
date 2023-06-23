@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 
 import { login } from '@/assets/assets'
 
-import styles from './styles'
+import styles from '../styles'
 
 function FormButtonDesk({ display }) {
   return (

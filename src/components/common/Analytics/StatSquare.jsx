@@ -1,4 +1,3 @@
-import React from 'react'
 import PropTypes from 'prop-types'
 
 import styles from './styles'
@@ -31,11 +30,10 @@ function StatSquare({
 StatSquare.defaultProps = {
   isProgressBar: false,
   color: null,
-  statNumber: null,
 }
 
 StatSquare.propTypes = {
-  statNumber: PropTypes.string,
+  statNumber: PropTypes.number,
   text: PropTypes.string.isRequired,
   isProgressBar: PropTypes.bool,
   color: PropTypes.string,

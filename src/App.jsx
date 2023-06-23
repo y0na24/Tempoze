@@ -1,17 +1,21 @@
 import { Route, Routes } from 'react-router-dom'
 import Layout from './components/common/Layout'
-import Analytics from '@/pages/Analytics'
-import Home from '@/pages/Home'
-import Login from '@/pages/Login'
-import NotFound from '@/pages/NotFound'
+import Analytics from '@/layouts/Analytics'
+import Home from '@/layouts/Home'
+import Login from '@/layouts/Login'
+import NotFound from '@/layouts/NotFound'
+import History from './layouts/History'
+import Profile from './layouts/Profile'
 
 function App() {
   return (
     <Routes>
       <Route path='/' element={<Layout />}>
-        <Route index element={<Home />} />
-        <Route path='login' element={<Login />} />
+        <Route index element={<Login />} />
+        <Route path='home' element={<Home />} />
+        <Route path='history' element={<History />} />
         <Route path='analytics' element={<Analytics />} />
+        <Route path='profile' element={<Profile />} />
         <Route path='*' element={<NotFound />} />
       </Route>
     </Routes>
