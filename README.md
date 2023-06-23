@@ -25,4 +25,4 @@
 *   Redux Toolkit
 *   Tailwind
 *   React-hook-form + yup
-* Node.js (in progress)
+* Node.js (в процессе)
