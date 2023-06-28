@@ -14,6 +14,7 @@ function Projects({ projects }) {
     description={p.description}
     time={p.time}
     categories={p.categories}
+    id={p._id}
   />
 				  ))
 			  : 'Проектов нет'}
