@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const projects =	localStorage.getItem('projects') !== null
-	? JSON.parse(localStorage.getItem('projects'))
-	: []
+  ? JSON.parse(localStorage.getItem('projects'))
+  : []
 
 const initialState = {
   entities: projects,

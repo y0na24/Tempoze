@@ -39,7 +39,7 @@ function Project({
         />
         <p className='text-[1.125rem]'>Описание проекта</p>
       </div>
-      <p className='text-4 font-medium'>{pluralizeHours(time)}</p>
+      <p className='text-4 font-medium text-center'>{pluralizeHours(time)}</p>
       <ProjectCategory categories={categories} />
       <Modal
         isVisible={showModal}

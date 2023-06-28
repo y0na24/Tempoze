@@ -8,7 +8,7 @@ function ProjectItem({ projectName, description, image }) {
   const { closeModal, openModal, showModal } = useModal()
 
   return (
-    <li className='flex items-center cursor-pointer' onClick={openModal}>
+    <li className='flex items-center cursor-pointer [&:not(:last-child)]:mb-4' onClick={openModal}>
       <img
         className='mr-[0.9063rem]'
         src={image}

@@ -5,7 +5,7 @@ import Category from '@/components/ui/Category'
 
 function ProjectCategory({ categories }) {
   return (
-    <ul>
+    <ul className='flex justify-end'>
       {categories
 				&& categories.map((c) => (
   <Category key={c.id} color={c.color} name={c.name} />

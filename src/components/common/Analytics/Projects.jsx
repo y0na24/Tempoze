@@ -1,28 +1,28 @@
-/* eslint-disable react/no-array-index-key */
 import React from 'react'
-import { useSelector } from 'react-redux'
-import { getProjectsList } from '@/store/projectsSlice'
+import PropTypes from 'prop-types'
 
 import Project from './Project'
 
-function Projects() {
-  const projects = useSelector(getProjectsList())
-
+function Projects({ projects }) {
   return (
     <ul className='overflow-x-scroll md:overflow-x-auto'>
       {projects.length > 0
-        ? projects.map((p) => (
-          <Project
-            key={p._id}
-            name={p.name}
-            description={p.description}
-            time={p.time}
-            categories={p.categories}
-          />
-        ))
-        : 'Проектов нет'}
+			  ? projects.map((p) => (
+  <Project
+    key={p._id}
+    name={p.name}
+    description={p.description}
+    time={p.time}
+    categories={p.categories}
+  />
+				  ))
+			  : 'Проектов нет'}
     </ul>
   )
+}
+
+Projects.propTypes = {
+  projects: PropTypes.array,
 }
 
 export default Projects

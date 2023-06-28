@@ -10,7 +10,7 @@ import {
 
 function ToolBar({ display }) {
   return (
-    <div className={`${display} pb-3 mx-3`}>
+    <div className={`${display} pb-3 mx-3 mt-7`}>
       <nav className='bg-mainColor py-[1.625rem] px-7 rounded-xl'>
         <ul className='flex items-center justify-between'>
           <li>
