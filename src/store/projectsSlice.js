@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const projects =	localStorage.getItem('projects') !== null
-	? JSON.parse(localStorage.getItem('projects'))
-	: []
+	  ? JSON.parse(localStorage.getItem('projects'))
+	  : []
 
 const initialState = {
   entities: projects,
@@ -16,16 +16,27 @@ const projectsSlice = createSlice({
       state.entities.push(action.payload)
       localStorage.setItem('projects', JSON.stringify(state.entities))
     },
+    projectDeleted(state, action) {
+      state.entities = state.entities.filter(
+        (project) => project._id !== action.payload,
+      )
+      localStorage.setItem('projects', JSON.stringify(state.entities))
+    },
   },
 })
 
 const { reducer: projectsReducer, actions } = projectsSlice
-const { newProjectAdded } = actions
+const { newProjectAdded, projectDeleted } = actions
 
 export const addNewProject = (payload) => (dispatch) => {
   dispatch(newProjectAdded(payload))
 }
 
+export const deleteProject = (projectId) => (dispatch) => {
+  dispatch(projectDeleted(projectId))
+}
+
+// Selectors
 export const getProjectsList = () => (state) => state.entities
 
 export const getCategoryList = () => (state) => state.entities.categories

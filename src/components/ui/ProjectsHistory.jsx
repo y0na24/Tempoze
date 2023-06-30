@@ -16,14 +16,16 @@ function ProjectsHistory({ title }) {
       <h3 className='text-xl font-semibold mb-4 text-center'>{title}</h3>
       <ul>
         {projects.length > 0
-          ? projects.map((p) => (
-            <ProjectItem
-              key={p._id}
-              projectName={p.name}
-              description={p.description}
-              image={projectSymbol}
-            />
-          ))
+          ? projects
+            .slice(0, 10)
+            .map((p) => (
+              <ProjectItem
+                key={p._id}
+                projectName={p.name}
+                description={p.description}
+                image={projectSymbol}
+              />
+            ))
           : 'Проектов нет'}
       </ul>
     </div>

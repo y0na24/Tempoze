@@ -1,6 +1,6 @@
-/* eslint-disable react/no-array-index-key */
-
+import React from 'react'
 import { useSelector } from 'react-redux'
+
 import ProgressBar from '@/components/common/Analytics/ProgressBar'
 import Projects from '@/components/common/Analytics/Projects'
 import StatSquare from '@/components/common/Analytics/StatSquare'
@@ -8,13 +8,39 @@ import StatSquare from '@/components/common/Analytics/StatSquare'
 import {
   getLongestSession,
   getProjectsAmount,
+  getProjectsList,
   getTimeSum,
 } from '@/store/projectsSlice'
+import Pagination from '@/components/common/Pagination'
+import SearchBar from '@/components/ui/SearchBar'
 
 function AnalyticsPage() {
   const timeSum = useSelector(getTimeSum())
   const projectsAmount = useSelector(getProjectsAmount())
   const longestSession = useSelector(getLongestSession())
+  const projects = useSelector(getProjectsList())
+
+  const [searchValue, setSearchValue] = React.useState('')
+  const [currentPage, setCurrentPage] = React.useState(1)
+  const [projectsPerPage] = React.useState(8)
+
+  const lastProjectIndex = currentPage * projectsPerPage
+  const firstProjectIndex = lastProjectIndex - projectsPerPage
+  const currentProjects = projects.slice(firstProjectIndex, lastProjectIndex)
+
+  const handleChange = (value) => {
+    setSearchValue(value)
+  }
+
+  const searchedProjects = currentProjects.filter((project) => {
+    const { categories } = project
+
+    for (const category of categories) {
+      return category.name.toLowerCase().includes(searchValue.toLowerCase())
+    }
+  })
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber)
 
   return (
     <div className='max-w-[111rem] mx-auto px-4'>
@@ -43,12 +69,21 @@ function AnalyticsPage() {
           <ProgressBar statNumber='10' text='Пауз в работе' color='gold' />
         </div>
       </div>
-      <div>
-        <h2 className='mb-6 text-[2.5rem] font-bold hidden md:block'>
-          Проекты
-        </h2>
-        <Projects />
+      <div className='mb-5'>
+        <div className='flex items-center justify-between mb-6'>
+          <h2 className='text-[2.5rem] font-bold hidden md:block'>Проекты</h2>
+          <SearchBar onChange={handleChange} value={searchValue} />
+        </div>
+        <Projects projects={searchedProjects} />
       </div>
+      {projects.length > 8 && (
+      <Pagination
+        projectsPerPage={projectsPerPage}
+        totalProjects={projectsAmount}
+        currentPage={currentPage}
+        paginate={paginate}
+      />
+      )}
     </div>
   )
 }
