@@ -22,6 +22,8 @@
 *   React
 *   Redux Toolkit
 *   Tailwind
+*   PropTypes
+*   Router 6
 *   React-hook-form + yup
 *   React-toast для нотификаций
 * Node.js (в процессе)
