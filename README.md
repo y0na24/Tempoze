@@ -23,4 +23,5 @@
 *   Redux Toolkit
 *   Tailwind
 *   React-hook-form + yup
+*   React-toast для нотификаций
 * Node.js (в процессе)
