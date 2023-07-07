@@ -1,0 +1,4 @@
+{
+  "port": 5050,
+  "mongoUri": "mongodb+srv://matveyklenov:klenov04@tempozecluster.kch4dlc.mongodb.net/"
+}
