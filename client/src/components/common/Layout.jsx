@@ -1,11 +1,13 @@
 import React from 'react'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router-dom'
 
 import Header from '../layout/Header/Header'
 import ToolBar from '../layout/ToolBar'
 import Loader from '../ui/Loader'
 
 function Layout() {
+	const location = useLocation()
+
 	const [isLoading, setIsLoading] = React.useState(true)
 	const [loaderValue, setLoaderValue] = React.useState(0)
 
@@ -24,6 +26,9 @@ function Layout() {
 		}, 50)
 	}, [])
 
+	const toShowToolbar =
+		location.pathname === '/login' || location.pathname === '/signUp'
+
 	return (
 		<div className='min-h-screen flex flex-col mx-auto'>
 			<header>
@@ -32,9 +37,7 @@ function Layout() {
 			<main className='flex-1'>
 				{isLoading ? <Loader value={loaderValue} /> : <Outlet />}
 			</main>
-			<footer>
-				<ToolBar display='sm:hidden' />
-			</footer>
+			<footer>{!toShowToolbar && <ToolBar display='sm:hidden' />}</footer>
 		</div>
 	)
 }

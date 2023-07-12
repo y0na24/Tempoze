@@ -1,7 +1,7 @@
-import Form from '@/components/common/Form/Form'
+import LoginForm from '@/components/common/Form/LoginForm'
 
 function LoginPage() {
-  return <Form title='Добро пожаловать!' />
+	return <LoginForm title='Добро пожаловать!' />
 }
 
 export default LoginPage

@@ -1,4 +1,6 @@
 {
   "port": 5050,
-  "mongoUri": "mongodb+srv://matveyklenov:klenov04@tempozecluster.kch4dlc.mongodb.net/"
+  "mongoUri": "mongodb+srv://matveyklenov:klenov04@tempozecluster.kch4dlc.mongodb.net/",
+  "accessSecret": "super secret from backend",
+  "refreshSecret": "super refresh key"
 }
