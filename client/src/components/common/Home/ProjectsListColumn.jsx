@@ -9,19 +9,20 @@ import { addNewProject } from '@/assets/assets'
 
 function ProjectsListColumn({ onClick, display }) {
 	const currentUrl = useLocation().pathname
+	const isHistoryPage = currentUrl === '/history'
 
 	const displayStyles =
 		display === 'mobile' ? 'flex sm:hidden' : 'hidden sm:flex'
 
 	return (
 		<div
-			className={`${displayStyles} h-[60vh] flex-col p-6 rounded-xl sm:bg-mainColor mt-8 sm:mt-0`}
+			className={`${displayStyles} ${isHistoryPage && 'h-[60vh]'}  flex-col p-6 rounded-xl sm:bg-mainColor mt-8 sm:mt-0`}
 		>
 			<div className='flex-1'>
 				<ProjectsHistory title='Список проектов' />
 			</div>
 
-			{currentUrl === '/history' ? (
+			{isHistoryPage ? (
 				<AddButton onClick={onClick} margin='ml-auto' image={addNewProject} />
 			) : (
 				<CreateButton onClick={onClick} />

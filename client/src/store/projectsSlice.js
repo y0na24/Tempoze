@@ -1,61 +1,115 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createAction, createSlice } from '@reduxjs/toolkit'
 
-const projects =	localStorage.getItem('projects') !== null
-	  ? JSON.parse(localStorage.getItem('projects'))
-	  : []
-
-const initialState = {
-  entities: projects,
-}
+import projectsService from '../services/project.service'
 
 const projectsSlice = createSlice({
-  name: 'projects',
-  initialState,
-  reducers: {
-    newProjectAdded(state, action) {
-      state.entities.push(action.payload)
-      localStorage.setItem('projects', JSON.stringify(state.entities))
-    },
-    projectDeleted(state, action) {
-      state.entities = state.entities.filter(
-        (project) => project._id !== action.payload,
-      )
-      localStorage.setItem('projects', JSON.stringify(state.entities))
-    },
-  },
+	name: 'projects',
+	initialState: {
+		entities: [],
+		isLoading: true,
+		error: null,
+	},
+	reducers: {
+		projectsRequested(state) {
+			state.isLoading = true
+		},
+		projectsReceived(state, action) {
+			if (action.payload) {
+				state.entities = action.payload
+			}
+			state.isLoading = false
+		},
+		projectsRequestFailed(state, action) {
+			state.error = action.payload
+			state.isLoading = false
+		},
+		projectCreated(state, action) {
+			state.entities.push(action.payload)
+		},
+		projectRemoved(state, action) {
+			state.entities = state.entities.filter(
+				project => project.projectId !== action.payload
+			)
+		},
+	},
 })
 
 const { reducer: projectsReducer, actions } = projectsSlice
-const { newProjectAdded, projectDeleted } = actions
+const {
+	projectsReceived,
+	projectsRequestFailed,
+	projectsRequested,
+	projectCreated,
+	projectRemoved,
+} = actions
 
-export const addNewProject = (payload) => (dispatch) => {
-  dispatch(newProjectAdded(payload))
+const projectRemovingFailed = createAction('projects/projectRemovingFailed')
+const projectAddingFailed = createAction('projects/projectAddingFailed')
+
+export const loadProjectsList = userId => async (dispatch, getState) => {
+	dispatch(projectsRequested)
+	try {
+		const { content } = await projectsService.getProjects(userId)
+		dispatch(projectsReceived(content))
+	} catch (error) {
+		dispatch(projectsRequestFailed(error.message))
+	}
 }
 
-export const deleteProject = (projectId) => (dispatch) => {
-  dispatch(projectDeleted(projectId))
+export const removeProject = id => async dispatch => {
+	try {
+		const { content } = await projectsService.removeProject(id)
+
+		if (!content) {
+			dispatch(projectRemoved(id))
+		}
+	} catch (error) {
+		dispatch(projectRemovingFailed(error.message))
+	}
 }
 
-// Selectors
-export const getProjectsList = () => (state) => state.entities
+export const createProject = payload => async (dispatch, getState) => {
+	try {
+		const { content } = await projectsService.createProject(payload)
+		dispatch(projectCreated(content))
+	} catch (error) {
+		dispatch(projectAddingFailed(error.message))
+	}
+}
 
-export const getCategoryList = () => (state) => state.entities.categories
+export const getProjects = () => state => state.projects.entities
 
-export const getTimeSum = () => (state) => state.entities.reduce((acc, elem) => acc + Number(elem.time), 0)
+export const getProjectsLoadingStatus = () => state => state.projects.isLoading
 
-export const getProjectsAmount = () => (state) => state.entities.length
+export const getProjectsList = () => state => {
+	if (state.projects.entities) {
+		return state.projects.entities
+	}
+	return null
+}
+export const getCategoryList = () => state => {
+	if (state.projects.entities.categories) {
+		return state.projects.entities.categories
+	}
+	return null
+}
 
-export const getLongestSession = () => (state) => {
-  let longestSession = 0
-  const projects = state.entities
+export const getTimeSum = () => state =>
+	state.projects.entities?.reduce((acc, elem) => acc + Number(elem.time), 0)
 
-  projects.forEach((project) => {
-    if (project.time > longestSession) {
-      longestSession = project.time
-    }
-  })
+export const getProjectsAmount = () => state => state.projects.entities?.length
 
-  return longestSession
+export const getLongestSession = () => state => {
+	let longestSession = 0
+	const projects = state.projects.entities
+
+	projects?.forEach(project => {
+		if (project.time > longestSession) {
+			longestSession = project.time
+		}
+	})
+
+	return longestSession
 }
 
 export default projectsReducer

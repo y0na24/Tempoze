@@ -1,20 +1,19 @@
-import PropTypes from 'prop-types'
+import { Bars } from 'react-loader-spinner'
 
-import { loaderLogo } from '@/assets/assets'
-
-function Loader({ value }) {
-  return (
-    <div className='top-1/2 left-1/2 absolute -translate-x-1/2 -translate-y-1/2'>
-      <img className='mb-4' src={loaderLogo} alt='Логотип' />
-      <div className='w-413px h-1 bg-white rounded-[7px]'>
-        <div style={{ width: `${value}%` }} className='bg-lightGreen h-1' />
-      </div>
-    </div>
-  )
-}
-
-Loader.propTypes = {
-  value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+function Loader() {
+	return (
+		<div className='h-screen flex items-center justify-center'>
+			<Bars
+				height='80'
+				width='80'
+				color='#34AC80'
+				ariaLabel='bars-loading'
+				wrapperStyle={{}}
+				wrapperClass=''
+				visible={true}
+			/>
+		</div>
+	)
 }
 
 export default Loader

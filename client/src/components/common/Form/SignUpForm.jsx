@@ -1,26 +1,37 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { useForm } from 'react-hook-form'
+import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { yupResolver } from '@hookform/resolvers/yup'
 
 import FormButton from '@/components/ui/Buttons/FormButton'
 import TextField from '@/components/ui/TextField'
 import FormButtonDesk from '@/components/ui/Buttons/FormButtonDesk'
-import loginSchema from '@/utils/validation'
+
+import { signUpSchema } from '@/utils/validation'
+import { signUp } from '@/store/userSlice'
 
 function Form({ title }) {
+	const dispatch = useDispatch()
 	const navigate = useNavigate()
+
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
 		reset,
-	} = useForm({ resolver: yupResolver(loginSchema) })
+		getValues,
+	} = useForm({ resolver: yupResolver(signUpSchema) })
 
-	const handleFormSubmit = () => {
+	const handleFormSubmit = async () => {
+		try {
+			await dispatch(signUp(getValues()))
+			navigate('/home')
+		} catch (e) {
+			console.log(e.message)
+		}
 		reset()
-		navigate('/login')
 	}
 
 	return (
@@ -41,14 +52,6 @@ function Form({ title }) {
 				error={errors.email?.message}
 			/>
 			<TextField
-				labelText='Логин'
-				type='login'
-				name='login'
-				placeholder='Введите логин'
-				register={register}
-				error={errors.email?.message}
-			/>
-			<TextField
 				labelText='Пароль'
 				type='password'
 				name='password'
@@ -57,12 +60,12 @@ function Form({ title }) {
 				error={errors.password?.message}
 			/>
 			<TextField
-				labelText='Подтвердите пароль'
-				type='password'
-				name='password'
+				labelText='Логин'
+				type='name'
+				name='name'
+				placeholder='Введите логин'
 				register={register}
-				placeholder='Введите пароль'
-				error={errors.password?.message}
+				error={errors.name?.message}
 			/>
 
 			<FormButtonDesk display='hidden sm:block' label={'Регистрация'} />

@@ -14,7 +14,9 @@ const schema = new Schema(
       type: String,
       required: true,
     },
-    categories: [{ type: Schema.Types.ObjectId, ref: 'Category' }],
+    userId: { type: String, required: true },
+    projectId: { type: String, required: true },
+    categories: [{ type: Object, ref: 'Category' }],
   },
   {
     timestamps: true,

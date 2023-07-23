@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { nanoid } from '@reduxjs/toolkit'
 import debounce from 'lodash.debounce'
 
@@ -10,12 +10,13 @@ import AddButton from '@/components/ui/Buttons/AddButton'
 import ExitButton from '@/components/ui/Buttons/ExitButton'
 import AddTagButton from '@/components/ui/Buttons/AddTagButton'
 
-import { addNewProject } from '@/store/projectsSlice'
+import { createProject } from '@/store/projectsSlice'
 
 import { categoryColors } from '@/constants'
 
 import { acceptBtn } from '@/assets/assets'
 import { toast } from 'react-toastify'
+import { getCurrentUserId } from '@/store/userSlice'
 
 const initialState = {
 	name: '',
@@ -26,6 +27,7 @@ const initialState = {
 
 function SideProjectsColumn({ onClick }) {
 	const dispatch = useDispatch()
+	const currentUserId = useSelector(getCurrentUserId())
 
 	const [sideProject, setSideProject] = React.useState(initialState)
 	const [isInputVisible, setIsVisible] = React.useState(false)
@@ -67,7 +69,7 @@ function SideProjectsColumn({ onClick }) {
 	}
 
 	const debouncedSideChangeHandler = React.useCallback(
-		debounce(handleSideChange, 200),
+		debounce(handleSideChange, 100),
 		[]
 	)
 
@@ -94,10 +96,11 @@ function SideProjectsColumn({ onClick }) {
 
 		const project = {
 			...sideProject,
-			time: sideProject.time,
-			_id: nanoid(),
+			userId: currentUserId,
+			projectId: nanoid() + currentUserId,
 		}
-		dispatch(addNewProject(project))
+
+		dispatch(createProject(project))
 		initiateSideState()
 	}
 

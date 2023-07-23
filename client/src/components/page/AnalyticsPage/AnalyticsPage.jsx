@@ -26,13 +26,13 @@ function AnalyticsPage() {
 
   const lastProjectIndex = currentPage * projectsPerPage
   const firstProjectIndex = lastProjectIndex - projectsPerPage
-  const currentProjects = projects.slice(firstProjectIndex, lastProjectIndex)
+  const currentProjects = projects?.slice(firstProjectIndex, lastProjectIndex)
 
   const handleChange = (value) => {
     setSearchValue(value)
   }
 
-  const searchedProjects = currentProjects.filter((project) => {
+  const searchedProjects = currentProjects?.filter((project) => {
     const { categories } = project
 
     for (const category of categories) {
@@ -50,7 +50,7 @@ function AnalyticsPage() {
           <StatSquare statNumber={projectsAmount} text='Проектов завершено' />
           <StatSquare statNumber={longestSession} text='Самая долгая сессия' />
         </div>
-        <div className='gap-3 flex-wrap justify-center hidden sm:flex'>
+        {/* <div className='gap-3 flex-wrap justify-center hidden sm:flex'>
           <StatSquare
             statNumber={10}
             text='Пауз на работе'
@@ -63,11 +63,11 @@ function AnalyticsPage() {
             isProgressBar
             color='lime'
           />
-        </div>
-        <div className='sm:hidden'>
+        </div> */}
+        {/* <div className='sm:hidden'>
           <ProgressBar statNumber='90' text='Эффективности' color='lime' />
           <ProgressBar statNumber='10' text='Пауз в работе' color='gold' />
-        </div>
+        </div> */}
       </div>
       <div className='mb-5'>
         <div className='flex items-center justify-between mb-6'>
@@ -76,7 +76,7 @@ function AnalyticsPage() {
         </div>
         <Projects projects={searchedProjects} />
       </div>
-      {projects.length > 8 && (
+      {projects?.length > 8 && (
       <Pagination
         projectsPerPage={projectsPerPage}
         totalProjects={projectsAmount}

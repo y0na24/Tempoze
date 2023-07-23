@@ -1,6 +1,6 @@
 import React from 'react'
-
-import { useDispatch } from 'react-redux'
+import {toast} from 'react-toastify'
+import { useDispatch, useSelector } from 'react-redux'
 import { nanoid } from '@reduxjs/toolkit'
 import debounce from 'lodash.debounce'
 
@@ -10,11 +10,12 @@ import AddButton from '@/components/ui/Buttons/AddButton'
 import AddTagButton from '@/components/ui/Buttons/AddTagButton'
 import Timer from './Timer'
 
-import { addNewProject } from '@/store/projectsSlice'
+import { createProject } from '@/store/projectsSlice'
 
 import { acceptBtn } from '@/assets/assets'
 
 import { categoryColors } from '@/constants'
+import { getCurrentUserId } from '@/store/userSlice'
 
 const initialState = {
 	name: '',
@@ -25,6 +26,8 @@ const initialState = {
 
 function CurrentProjectsColumn() {
 	const dispatch = useDispatch()
+	const currentUserId = useSelector(getCurrentUserId())
+
 	const [isInputVisible, setIsVisible] = React.useState(false)
 	const [currentProject, setCurrentProject] = React.useState(initialState)
 	const [time, setTime] = React.useState({ s: 0, m: 0, h: 0 })
@@ -45,7 +48,7 @@ function CurrentProjectsColumn() {
 	}
 
 	const debouncedCurrentChangeHandler = React.useCallback(
-		debounce(handleCurrentChange, 200),
+		debounce(handleCurrentChange, 100),
 		[]
 	)
 
@@ -107,10 +110,11 @@ function CurrentProjectsColumn() {
 		const project = {
 			...currentProject,
 			time: convertTimeToHours(),
-			_id: nanoid(),
+			userId: currentUserId,
+			projectId: currentUserId + nanoid()
 		}
 
-		dispatch(addNewProject(project))
+		dispatch(createProject(project))
 		setTime({ s: 0, m: 0, h: 0 })
 		initiateCurrentState()
 	}

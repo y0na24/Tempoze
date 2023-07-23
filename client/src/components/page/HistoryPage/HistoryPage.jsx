@@ -59,7 +59,7 @@ function HistoryPage() {
   }
 
   const debouncedSideChangeHandler = React.useCallback(
-    debounce(handleSideChange, 200),
+    debounce(handleSideChange, 100),
     [],
   )
 

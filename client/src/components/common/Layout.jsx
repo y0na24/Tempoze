@@ -8,23 +8,23 @@ import Loader from '../ui/Loader'
 function Layout() {
 	const location = useLocation()
 
-	const [isLoading, setIsLoading] = React.useState(true)
-	const [loaderValue, setLoaderValue] = React.useState(0)
+	// const [isLoading, setIsLoading] = React.useState(true)
+	// const [loaderValue, setLoaderValue] = React.useState(0)
 
-	React.useEffect(() => {
-		const interval = setInterval(() => {
-			setLoaderValue(oldValue => {
-				const newValue = oldValue + 10
+	// React.useEffect(() => {
+	// 	const interval = setInterval(() => {
+	// 		setLoaderValue(oldValue => {
+	// 			const newValue = oldValue + 10
 
-				if (newValue > 100) {
-					setIsLoading(false)
-					clearInterval(interval)
-				}
+	// 			if (newValue > 100) {
+	// 				setIsLoading(false)
+	// 				clearInterval(interval)
+	// 			}
 
-				return newValue
-			})
-		}, 50)
-	}, [])
+	// 			return newValue
+	// 		})
+	// 	}, 50)
+	// }, [])
 
 	const toShowToolbar =
 		location.pathname === '/login' || location.pathname === '/signUp'
@@ -35,7 +35,7 @@ function Layout() {
 				<Header />
 			</header>
 			<main className='flex-1'>
-				{isLoading ? <Loader value={loaderValue} /> : <Outlet />}
+				<Outlet />
 			</main>
 			<footer>{!toShowToolbar && <ToolBar display='sm:hidden' />}</footer>
 		</div>

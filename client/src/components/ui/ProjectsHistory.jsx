@@ -15,7 +15,7 @@ function ProjectsHistory({ title }) {
     <div className='mb-9'>
       <h3 className='text-xl font-semibold mb-4 text-center'>{title}</h3>
       <ul>
-        {projects.length > 0
+        {projects?.length > 0
           ? projects
             .slice(0, 10)
             .map((p) => (

@@ -26,7 +26,7 @@ function DesktopHeader() {
 					</li>
 				</NavLink>
 			</ul>
-			{!isStartingPage && <UserProfile userName='userName' />}
+			{!isStartingPage && <UserProfile />}
 		</nav>
 	)
 }

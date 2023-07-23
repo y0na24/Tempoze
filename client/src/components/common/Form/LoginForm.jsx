@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { useDispatch } from 'react-redux'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -7,20 +8,33 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import FormButton from '@/components/ui/Buttons/FormButton'
 import TextField from '@/components/ui/TextField'
 import FormButtonDesk from '@/components/ui/Buttons/FormButtonDesk'
-import loginSchema from '@/utils/validation'
+
+import { loginSchema } from '@/utils/validation'
+
+import { singIn } from '@/store/userSlice'
 
 function Form({ title }) {
+	const dispatch = useDispatch()
 	const navigate = useNavigate()
+
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
 		reset,
+		getValues,
 	} = useForm({ resolver: yupResolver(loginSchema) })
 
-	const handleFormSubmit = () => {
+	const handleFormSubmit = async () => {
+		try {
+			await dispatch(singIn(getValues()))
+			reset()
+			navigate('/home')
+		} catch (e) {
+			console.log(e.message)
+		}
+
 		reset()
-		navigate('/home')
 	}
 
 	return (
@@ -53,7 +67,7 @@ function Form({ title }) {
 			<FormButton display='sm:hidden' label='Войти' />
 
 			<div className='flex items-center justify-between'>
-				<Link to={'/signUp'} className='text-sm text-white underline' href='/#'>
+				<Link to={'/signUp'} className='text-sm text-white underline'>
 					Не зарегестрированы?
 				</Link>
 				<div className='flex items-center gap-[0.375rem]'>
