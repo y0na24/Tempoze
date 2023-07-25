@@ -34,7 +34,6 @@ function AnalyticsPage() {
 
 	const searchedProjects = currentProjects?.filter(project => {
 		const { categories } = project
-		console.log(categories)
 
 		for (const category of categories) {
 			if (category.name.toLowerCase().includes(searchValue.toLowerCase())) {
