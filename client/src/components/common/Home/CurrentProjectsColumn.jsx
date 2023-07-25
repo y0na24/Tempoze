@@ -1,5 +1,5 @@
 import React from 'react'
-import {toast} from 'react-toastify'
+import { toast } from 'react-toastify'
 import { useDispatch, useSelector } from 'react-redux'
 import { nanoid } from '@reduxjs/toolkit'
 import debounce from 'lodash.debounce'
@@ -31,6 +31,7 @@ function CurrentProjectsColumn() {
 	const [isInputVisible, setIsVisible] = React.useState(false)
 	const [currentProject, setCurrentProject] = React.useState(initialState)
 	const [time, setTime] = React.useState({ s: 0, m: 0, h: 0 })
+	const [status, setStatus] = React.useState(false)
 
 	const initiateCurrentState = () => {
 		setCurrentProject(initialState)
@@ -111,7 +112,7 @@ function CurrentProjectsColumn() {
 			...currentProject,
 			time: convertTimeToHours(),
 			userId: currentUserId,
-			projectId: currentUserId + nanoid()
+			projectId: currentUserId + nanoid(),
 		}
 
 		dispatch(createProject(project))
@@ -124,7 +125,13 @@ function CurrentProjectsColumn() {
 			onSubmit={handleSubmit}
 			className='pt-16 sm:px-16 flex-col rounded-xl sm:bg-mainColor basis-[61.25rem]'
 		>
-			<Timer time={time} updateTimer={updateTimer} restartTimer={resetTimer} />
+			<Timer
+				time={time}
+				updateTimer={updateTimer}
+				restartTimer={resetTimer}
+				status={status}
+				setStatus={setStatus}
+			/>
 			<TextField
 				labelText='Название проекта'
 				placeholder='Введите название'
@@ -150,7 +157,7 @@ function CurrentProjectsColumn() {
 					<AddTagButton onClick={handleInputVisibility} />
 				)}
 			</CategoryList>
-			<AddButton margin='ml-auto' image={acceptBtn} />
+			{!status && <AddButton margin='ml-auto' image={acceptBtn} />}
 		</form>
 	)
 }

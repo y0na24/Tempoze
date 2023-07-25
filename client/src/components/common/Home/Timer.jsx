@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 
 import { pauseBtn, playBtn, restartImg } from '@/assets/assets'
 
-function Timer({ time, updateTimer, restartTimer }) {
+function Timer({ time, updateTimer, restartTimer, status, setStatus }) {
   const [interv, setInterv] = React.useState()
-  const [status, setStatus] = React.useState(false)
+ 
 
   const startTimer = () => {
     runTimer()

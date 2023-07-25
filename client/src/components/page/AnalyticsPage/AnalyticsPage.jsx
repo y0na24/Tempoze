@@ -44,10 +44,10 @@ function AnalyticsPage() {
 	})
 
 	React.useEffect(() => {
-		if (projects.length < 9 || searchedProjects < 9) {
+		if (searchedProjects < 9) {
 			setCurrentPage(1)
 		}
-	}, [currentProjects])
+	}, [searchedProjects])
 
 	const paginate = pageNumber => setCurrentPage(pageNumber)
 
