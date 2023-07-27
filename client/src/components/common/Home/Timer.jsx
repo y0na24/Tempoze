@@ -51,7 +51,7 @@ function Timer({ time, updateTimer, restartTimer, status, setStatus }) {
   }
 
   return (
-    <div className='flex items-center gap-6 mb-12'>
+    <div className='flex items-center gap-6 mb-12 relative'>
       <p className='flex items-center font-bold text-5xl sm:text-[3rem]'>
         {hours()}
 				&nbsp;&nbsp;
@@ -59,7 +59,7 @@ function Timer({ time, updateTimer, restartTimer, status, setStatus }) {
 				&nbsp;:&nbsp;
         <span className='block'>{time.s >= 10 ? time.s : `0${time.s}`}</span>
       </p>
-      <div className='flex items-center gap-4'>
+      <div className='flex items-center gap-4 absolute left-56'>
         {status && (
         <button type='button' onClick={stopTimer}>
           <img src={pauseBtn} alt='Пауза' width={45} height={45} />
