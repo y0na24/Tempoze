@@ -3,8 +3,9 @@ import { getIsLoggedIn } from './store/userSlice'
 import { Route, Routes, Navigate } from 'react-router-dom'
 
 import Layout from './components/common/Layout'
-import AppLoader from './components/ui/hoc/AppLoader'
+import AppLoader from './components/common/AppLoader'
 import Loader from './components/ui/Loader'
+import AuthRequiredLayout from './components/common/AuthRequire'
 
 import Analytics from '@/layouts/Analytics'
 import Home from '@/layouts/Home'
@@ -16,7 +17,6 @@ import { ToastContainer } from 'react-toastify'
 import { useSelector } from 'react-redux'
 
 import 'react-toastify/dist/ReactToastify.css'
-import AuthRequiredLayout from './components/ui/hoc/AuthRequire'
 
 const Profile = lazy(() => import('./layouts/Profile'))
 

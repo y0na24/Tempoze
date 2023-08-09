@@ -9,7 +9,7 @@ import {
 } from '@/store/userSlice'
 
 import { useDispatch, useSelector } from 'react-redux'
-import Loader from '../Loader'
+import Loader from '../ui/Loader'
 import { loadProjectsList } from '@/store/projectsSlice'
 
 const AppLoader = ({ children }) => {

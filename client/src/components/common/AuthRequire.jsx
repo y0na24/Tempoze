@@ -1,6 +1,5 @@
 import { useSelector } from 'react-redux'
 import { Navigate, Outlet } from 'react-router-dom'
-import { useLocation } from 'react-router-dom'
 
 import { getIsLoggedIn } from '@/store/userSlice'
 
