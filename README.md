@@ -1,5 +1,5 @@
 
-<h1 align="center" id="title">Tempoze📝 (MVP)</h1>
+<h1 align="center" id="title">Tempoze📝</h1>
 
 <p id="description">Приложение для отслеживания задач.</p>
   
